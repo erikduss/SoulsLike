@@ -12,6 +12,13 @@ namespace SoulsLike
         public float mouseX;
         public float mouseY;
 
+        public bool b_Input;
+
+        public bool rollFlag;
+        public bool sprintFlag;
+        public float rollInputTimer;
+        public bool isInteracting;
+
         PlayerControls inputActions;
         CameraHandler cameraHandler;
 
@@ -54,6 +61,7 @@ namespace SoulsLike
         public void TickInput(float delta)
         {
             MoveInput(delta);
+            HandleRollInput(delta);
         }
 
         private void MoveInput(float delta)
@@ -63,6 +71,27 @@ namespace SoulsLike
             moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
             mouseX = cameraInput.x;
             mouseY = cameraInput.y;
+        }
+
+        private void HandleRollInput(float delta)
+        {
+            b_Input = inputActions.PlayerActions.Roll.IsPressed();
+
+            if (b_Input)
+            {
+                rollInputTimer += delta;
+                sprintFlag = true;
+            }
+            else
+            {
+                if(rollInputTimer > 0 && rollInputTimer < 0.5f)
+                {
+                    sprintFlag = false;
+                    rollFlag = true;
+                }
+
+                rollInputTimer = 0;
+            }
         }
     }
 }
