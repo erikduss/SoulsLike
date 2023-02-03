@@ -20,7 +20,7 @@ namespace SoulsLike
 
         private void Awake()
         {
-            cameraHandler = CameraHandler.singleton;
+            cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
         // Start is called before the first frame update
