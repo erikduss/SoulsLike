@@ -43,6 +43,8 @@ namespace SoulsLike
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+
+            CheckForInteractableObject();
         }
 
         private void FixedUpdate()
@@ -66,10 +68,39 @@ namespace SoulsLike
             inputHandler.d_Pad_Down = false;
             inputHandler.d_Pad_Left = false;
             inputHandler.d_Pad_Right = false;
+            inputHandler.a_Input = false;
 
             if (isInAir)
             {
                 playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
+            }
+        }
+
+        public void CheckForInteractableObject()
+        {
+            RaycastHit hit;
+            Vector3 rayOrigin = transform.position;
+            rayOrigin.y = rayOrigin.y + 2f;
+
+            // Added second ShpereCast to keep triggering when player walks over interactable object
+            if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers) || Physics.SphereCast(rayOrigin, 0.3f, Vector3.down, out hit, 2.5f, cameraHandler.ignoreLayers))
+            {
+                if(hit.collider.tag == "Interactable")
+                {
+                    Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+
+                    if(interactableObject != null)
+                    {
+                        string interactableText = interactableObject.interactableText;
+                        //set the UI text to the interactable object's text
+                        //set the text pop up to true
+
+                        if (inputHandler.a_Input)
+                        {
+                            hit.collider.GetComponent<Interactable>().Interact(this);
+                        }
+                    }
+                }
             }
         }
     }

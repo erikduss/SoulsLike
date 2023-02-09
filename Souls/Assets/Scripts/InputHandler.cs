@@ -13,6 +13,7 @@ namespace SoulsLike
         public float mouseY;
 
         public bool b_Input;
+        public bool a_Input;
         public bool rb_Input;
         public bool rt_Input;
         public bool d_Pad_Up;
@@ -64,6 +65,7 @@ namespace SoulsLike
             HandleRollInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotsInput();
+            HandleInteractableButtonInput();
         }
 
         private void MoveInput(float delta)
@@ -151,6 +153,12 @@ namespace SoulsLike
             {
                 playerInventory.ChangeLeftWeapon();
             }
+
+        }
+
+        private void HandleInteractableButtonInput()
+        {
+            inputActions.PlayerActions.A.performed += i => a_Input = true;
 
         }
     }
