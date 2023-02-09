@@ -11,6 +11,10 @@ namespace SoulsLike
         CameraHandler cameraHandler;
         PlayerLocomotion playerLocomotion;
 
+        InteractableUI interactableUI;
+        public GameObject interactableUIGameObject;
+        public GameObject itemInteractableGameObject;
+
         public bool isInteracting;
 
         [Header("Player Flags")]
@@ -30,6 +34,7 @@ namespace SoulsLike
             inputHandler = GetComponent<InputHandler>();
             anim = GetComponentInChildren<Animator>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
+            interactableUI = FindObjectOfType<InteractableUI>();
         }
 
         // Update is called once per frame
@@ -79,11 +84,9 @@ namespace SoulsLike
         public void CheckForInteractableObject()
         {
             RaycastHit hit;
-            Vector3 rayOrigin = transform.position;
-            rayOrigin.y = rayOrigin.y + 2f;
 
             // Added second ShpereCast to keep triggering when player walks over interactable object
-            if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers) || Physics.SphereCast(rayOrigin, 0.3f, Vector3.down, out hit, 2.5f, cameraHandler.ignoreLayers))
+            if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
             {
                 if(hit.collider.tag == "Interactable")
                 {
@@ -92,14 +95,26 @@ namespace SoulsLike
                     if(interactableObject != null)
                     {
                         string interactableText = interactableObject.interactableText;
-                        //set the UI text to the interactable object's text
-                        //set the text pop up to true
+                        interactableUI.interactableText.text = interactableText;
+                        interactableUIGameObject.SetActive(true);
 
                         if (inputHandler.a_Input)
                         {
                             hit.collider.GetComponent<Interactable>().Interact(this);
                         }
                     }
+                }
+            }
+            else
+            {
+                if(interactableUIGameObject != null)
+                {
+                    interactableUIGameObject.SetActive(false);
+                }
+
+                if(interactableUIGameObject != null && inputHandler.a_Input)
+                {
+                    itemInteractableGameObject.SetActive(false);
                 }
             }
         }

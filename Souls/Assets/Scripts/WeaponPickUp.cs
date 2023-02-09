@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SoulsLike
 {
@@ -29,6 +31,9 @@ namespace SoulsLike
             playerLocomotion.rigidbody.velocity = Vector3.zero; //stops the player from moving whilst picking up item
             animatorHandler.PlayTargetAnimation("Pick Up Item", true); //Plays the animation of looting the item
             playerInventory.weaponInventory.Add(weapon);
+            playerManager.itemInteractableGameObject.GetComponentInChildren<TextMeshProUGUI>().text = weapon.itemName;
+            playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = weapon.itemIcon.texture;
+            playerManager.itemInteractableGameObject.SetActive(true);
 
             Destroy(gameObject);
         }
