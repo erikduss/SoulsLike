@@ -109,6 +109,15 @@
             "id": "62ea2219-25c6-482a-b3e0-bb1d7372951a",
             "actions": [
                 {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "005d2f44-865a-42d2-8627-609ebdbcd1a3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Roll",
                     "type": "Button",
                     "id": "4d08feef-2a84-424e-a1ef-d65243633387",
@@ -139,6 +148,15 @@
                     "name": "A",
                     "type": "Button",
                     "id": "64c498b5-fad6-4314-8933-772e0abb138e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "bacc47b0-c307-4de5-8b6c-817351210da4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -209,6 +227,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6fa34b76-3a84-4af1-bacc-893ea038b9f6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e81f7b6-7e9d-4daa-a1e9-3abed56aaa02",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5932d37a-4dd2-4029-8b94-8188b1d341d4",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

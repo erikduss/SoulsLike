@@ -16,6 +16,9 @@ namespace SoulsLike
         public bool a_Input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool jump_Input;
+        public bool inventory_Input;
+
         public bool d_Pad_Up;
         public bool d_Pad_Down;
         public bool d_Pad_Left;
@@ -24,6 +27,7 @@ namespace SoulsLike
         public bool rollFlag;
         public bool sprintFlag;
         public bool comboFlag;
+        public bool inventoryFlag;
         public float rollInputTimer;
         
 
@@ -31,6 +35,7 @@ namespace SoulsLike
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        UIManager uiManager;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -40,6 +45,7 @@ namespace SoulsLike
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            uiManager = FindObjectOfType<UIManager>();
         }
 
         public void OnEnable()
@@ -49,6 +55,13 @@ namespace SoulsLike
                 inputActions = new PlayerControls();
                 inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+                inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+                inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+                inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true; 
+                inputActions.PlayerActions.A.performed += i => a_Input = true;
+                inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+                inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
             }
 
             inputActions.Enable();
@@ -65,7 +78,7 @@ namespace SoulsLike
             HandleRollInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotsInput();
-            HandleInteractableButtonInput();
+            HandleInventoryInput();
         }
 
         private void MoveInput(float delta)
@@ -80,11 +93,11 @@ namespace SoulsLike
         private void HandleRollInput(float delta)
         {
             b_Input = inputActions.PlayerActions.Roll.IsPressed();
+            sprintFlag = b_Input;
 
             if (b_Input)
             {
                 rollInputTimer += delta;
-                sprintFlag = true;
             }
             else
             {
@@ -100,9 +113,6 @@ namespace SoulsLike
 
         private void HandleAttackInput(float delta)
         {
-            inputActions.PlayerActions.RB.performed += i => rb_Input = true;
-            inputActions.PlayerActions.RT.performed += i => rt_Input = true;
-
             //RB Input handles the RIGHT hand weapon's light attack
             if (rb_Input)
             {
@@ -142,9 +152,6 @@ namespace SoulsLike
 
         private void HandleQuickSlotsInput()
         {
-            inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
-            inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
-
             if (d_Pad_Right)
             {
                 playerInventory.ChangeRightWeapon();
@@ -156,10 +163,25 @@ namespace SoulsLike
 
         }
 
-        private void HandleInteractableButtonInput()
+        private void HandleInventoryInput()
         {
-            inputActions.PlayerActions.A.performed += i => a_Input = true;
+            if (inventory_Input)
+            {
+                inventoryFlag = !inventoryFlag;
 
+                if (inventoryFlag)
+                {
+                    uiManager.OpenSelectWindow();
+                    uiManager.UpdateUI();
+                    uiManager.hudWindow.SetActive(false);
+                }
+                else
+                {
+                    uiManager.CloseSelectWindow();
+                    uiManager.CloseAllInventoryWindows();
+                    uiManager.hudWindow.SetActive(true);
+                }
+            }
         }
     }
 }
