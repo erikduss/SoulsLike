@@ -6,6 +6,7 @@ namespace SoulsLike
 {
     public class PlayerLocomotion : MonoBehaviour
     {
+        CameraHandler cameraHandler;
         PlayerManager playerManager;
         Transform cameraObject;
         InputHandler inputHandler;
@@ -41,6 +42,11 @@ namespace SoulsLike
         [SerializeField]
         float fallingSpeed = 45;
 
+        private void Awake()
+        {
+            cameraHandler = FindObjectOfType<CameraHandler>();
+        }
+
         void Start()
         {
             playerManager = GetComponent<PlayerManager>();
@@ -62,27 +68,61 @@ namespace SoulsLike
 
         private void HandleRotation(float delta)
         {
-            Vector3 targetDir = Vector3.zero;
-            float moveOverride = inputHandler.moveAmount;
-
-            targetDir = cameraObject.forward * inputHandler.vertical;
-            targetDir += cameraObject.right * inputHandler.horizontal;
-
-            targetDir.Normalize();
-            targetDir.y = 0;
-
-            if (targetDir == Vector3.zero)
+            if (inputHandler.lockOnFlag)
             {
-                targetDir = myTransform.forward;
+                if(inputHandler.sprintFlag || inputHandler.rollFlag)
+                {
+                    Vector3 targetDirection = Vector3.zero;
+                    targetDirection = cameraHandler.cameraTransform.forward * inputHandler.vertical;
+                    targetDirection += cameraHandler.cameraTransform.right * inputHandler.horizontal;
+                    targetDirection.Normalize();
+                    targetDirection.y = 0;
+
+                    if (targetDirection == Vector3.zero)
+                    {
+                        targetDirection = transform.forward;
+                    }
+
+                    Quaternion tr = Quaternion.LookRotation(targetDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
+
+                    transform.rotation = targetRotation;
+                }
+                else
+                {
+                    Vector3 rotationDirection = moveDirection;
+                    rotationDirection = cameraHandler.currentLockOnTarget.position - transform.position;
+                    rotationDirection.y = 0;
+                    rotationDirection.Normalize();
+                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
+                    transform.rotation = targetRotation;
+                }
             }
+            else
+            {
+                Vector3 targetDir = Vector3.zero;
+                float moveOverride = inputHandler.moveAmount;
 
-            float rs = rotationSpeed;
+                targetDir = cameraObject.forward * inputHandler.vertical;
+                targetDir += cameraObject.right * inputHandler.horizontal;
 
-            //tr = Target Rotation
-            Quaternion tr = Quaternion.LookRotation(targetDir);
-            Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+                targetDir.Normalize();
+                targetDir.y = 0;
 
-            myTransform.rotation = targetRotation;
+                if (targetDir == Vector3.zero)
+                {
+                    targetDir = myTransform.forward;
+                }
+
+                float rs = rotationSpeed;
+
+                //tr = Target Rotation
+                Quaternion tr = Quaternion.LookRotation(targetDir);
+                Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+
+                myTransform.rotation = targetRotation;
+            }
         }
 
         public void HandleMovement(float delta)
@@ -127,7 +167,15 @@ namespace SoulsLike
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
             rigidbody.velocity = projectedVelocity;
 
-            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+            if (inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
+            {
+                animatorHandler.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
+            }
+            else
+            {
+                animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+            }
+            
 
             if (animatorHandler.canRotate)
             {
