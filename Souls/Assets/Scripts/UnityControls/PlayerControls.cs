@@ -254,6 +254,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Y"",
+                    ""type"": ""Button"",
+                    ""id"": ""8936b0ce-e8b8-4c72-a967-995cf7420d55"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -375,6 +384,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ed3856f-d43f-466e-96f1-1b9b8402f202"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Y"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea50ee95-af39-4ff6-8b73-224ebba78c3f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Y"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -530,6 +561,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_RT = m_PlayerActions.FindAction("RT", throwIfNotFound: true);
         m_PlayerActions_A = m_PlayerActions.FindAction("A", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerActions_Y = m_PlayerActions.FindAction("Y", throwIfNotFound: true);
         // Player Quick Slots
         m_PlayerQuickSlots = asset.FindActionMap("Player Quick Slots", throwIfNotFound: true);
         m_PlayerQuickSlots_DPadUp = m_PlayerQuickSlots.FindAction("D-Pad Up", throwIfNotFound: true);
@@ -659,6 +691,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_RT;
     private readonly InputAction m_PlayerActions_A;
     private readonly InputAction m_PlayerActions_Jump;
+    private readonly InputAction m_PlayerActions_Y;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -670,6 +703,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @RT => m_Wrapper.m_PlayerActions_RT;
         public InputAction @A => m_Wrapper.m_PlayerActions_A;
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
+        public InputAction @Y => m_Wrapper.m_PlayerActions_Y;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -700,6 +734,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnJump;
+                @Y.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnY;
+                @Y.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnY;
+                @Y.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnY;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -725,6 +762,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Y.started += instance.OnY;
+                @Y.performed += instance.OnY;
+                @Y.canceled += instance.OnY;
             }
         }
     }
@@ -802,6 +842,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnRT(InputAction.CallbackContext context);
         void OnA(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnY(InputAction.CallbackContext context);
     }
     public interface IPlayerQuickSlotsActions
     {

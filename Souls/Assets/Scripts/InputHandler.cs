@@ -14,6 +14,7 @@ namespace SoulsLike
 
         public bool b_Input;
         public bool a_Input;
+        public bool y_Input;
         public bool rb_Input;
         public bool rt_Input;
         public bool jump_Input;
@@ -28,6 +29,7 @@ namespace SoulsLike
         public bool d_Pad_Right;
 
         public bool rollFlag;
+        public bool twoHandFlag;
         public bool sprintFlag;
         public bool comboFlag;
         public bool lockOnFlag;
@@ -39,6 +41,7 @@ namespace SoulsLike
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        WeaponSlotManager weaponSlotManager;
         CameraHandler cameraHandler;
         UIManager uiManager;
 
@@ -50,6 +53,7 @@ namespace SoulsLike
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             uiManager = FindObjectOfType<UIManager>();
         }
@@ -71,6 +75,7 @@ namespace SoulsLike
                 inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
                 inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
                 inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
+                inputActions.PlayerActions.Y.performed += i => y_Input = true;
             }
 
             inputActions.Enable();
@@ -89,6 +94,7 @@ namespace SoulsLike
             HandleQuickSlotsInput();
             HandleInventoryInput();
             HandleLockOnInput();
+            HandleTwoHandInput();
         }
 
         private void HandleMoveInput(float delta)
@@ -229,6 +235,27 @@ namespace SoulsLike
                 if (cameraHandler.rightLockTarget != null)
                 {
                     cameraHandler.currentLockOnTarget = cameraHandler.rightLockTarget;
+                }
+            }
+        }
+
+        private void HandleTwoHandInput()
+        {
+            if (y_Input)
+            {
+                y_Input = false;
+                twoHandFlag = !twoHandFlag;
+
+                if (twoHandFlag)
+                {
+                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+                    //enable two handing
+                }
+                else
+                {
+                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+                    //disable two handing
                 }
             }
         }

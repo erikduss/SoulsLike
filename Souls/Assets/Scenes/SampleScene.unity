@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 10662545}
   m_Layer: 5
-  m_Name: Equipment Window
+  m_Name: Equipment Screen Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,8 +195,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -437, y: 0}
-  m_SizeDelta: {x: 500, y: 750}
+  m_AnchoredPosition: {x: -267, y: 0}
+  m_SizeDelta: {x: 350, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &124019973
 MonoBehaviour:
@@ -528,7 +528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -60}
+  m_AnchoredPosition: {x: 120, y: -60}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328788707
@@ -578,6 +578,42 @@ MonoBehaviour:
       - m_Target: {fileID: 1421444358}
         m_TargetAssemblyTypeName: SoulsLike.EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectRightHandSlot01
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2038354875}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 10662544}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 328788710}
+        m_TargetAssemblyTypeName: SoulsLike.HandEquipmentSlotUI, Assembly-CSharp
+        m_MethodName: SelectThisSlot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5692,6 +5728,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &466400814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 466400815}
+  - component: {fileID: 466400816}
+  m_Layer: 0
+  m_Name: Back Weapon Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &466400815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466400814}
+  m_LocalRotation: {x: 0.00032994716, y: 0.006830549, z: 0.4207083, w: 0.90717024}
+  m_LocalPosition: {x: 0.181, y: 0.053, z: -0.153}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 819589839}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -0.295, y: 0.726, z: 49.758}
+--- !u!114 &466400816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466400814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b2b6f46213b9274e87bc336cb5bd7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentOverride: {fileID: 466400815}
+  currentWeapon: {fileID: 0}
+  isLeftHandSlot: 0
+  isRightHandSlot: 0
+  isBackSlot: 1
+  currentWeaponModel: {fileID: 0}
 --- !u!1 &480757504
 GameObject:
   m_ObjectHideFlags: 0
@@ -5889,9 +5975,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 2040735228}
+  equipmentWindowUI: {fileID: 1421444358}
   hudWindow: {fileID: 392920448}
   selectWindow: {fileID: 332176904}
+  equipmentScreenWindow: {fileID: 10662544}
   weaponInventoryWindow: {fileID: 2038354875}
+  rightHandSlot01Selected: 0
+  rightHandSlot02Selected: 0
+  leftHandSlot01Selected: 0
+  leftHandSlot02Selected: 0
   weaponInventorySlotPrefab: {fileID: 1333641726}
   weaponInventorySlotsParent: {fileID: 124019972}
 --- !u!1 &525330805
@@ -6729,8 +6821,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -437, y: 0}
-  m_SizeDelta: {x: 500, y: 750}
+  m_AnchoredPosition: {x: -267, y: 0}
+  m_SizeDelta: {x: 350, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &814834582
 MonoBehaviour:
@@ -6852,6 +6944,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816637104}
   m_CullTransparentMesh: 1
+--- !u!4 &819589839 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 366175167995203695, guid: ff392cd555ebac341bebe8baf3e9036d, type: 3}
+  m_PrefabInstance: {fileID: 488743796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &914208139
 GameObject:
   m_ObjectHideFlags: 0
@@ -7680,7 +7777,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -140}
+  m_AnchoredPosition: {x: 120, y: -140}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1127545708
@@ -7730,6 +7827,42 @@ MonoBehaviour:
       - m_Target: {fileID: 1421444358}
         m_TargetAssemblyTypeName: SoulsLike.EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectLeftHandSlot01
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2038354875}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 10662544}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1127545711}
+        m_TargetAssemblyTypeName: SoulsLike.HandEquipmentSlotUI, Assembly-CSharp
+        m_MethodName: SelectThisSlot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7854,8 +7987,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentOverride: {fileID: 1380451214}
+  currentWeapon: {fileID: 0}
   isLeftHandSlot: 1
   isRightHandSlot: 0
+  isBackSlot: 0
   currentWeaponModel: {fileID: 0}
 --- !u!1 &1209096640
 GameObject:
@@ -13178,8 +13313,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 243.5}
-  m_SizeDelta: {x: 420, y: 200}
+  m_AnchoredPosition: {x: 0, y: 123.5}
+  m_SizeDelta: {x: 320, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1398199696
 MonoBehaviour:
@@ -13394,6 +13529,11 @@ MonoBehaviour:
   rightHandSlot02Selected: 0
   leftHandSlot01Selected: 0
   leftHandSlot02Selected: 0
+  handEquipmentSlotUI:
+  - {fileID: 1127545711}
+  - {fileID: 2117484272}
+  - {fileID: 328788710}
+  - {fileID: 2052541236}
 --- !u!1 &1487772513
 GameObject:
   m_ObjectHideFlags: 0
@@ -14336,6 +14476,7 @@ MonoBehaviour:
   mouseY: 0
   b_Input: 0
   a_Input: 0
+  y_Input: 0
   rb_Input: 0
   rt_Input: 0
   jump_Input: 0
@@ -14348,6 +14489,7 @@ MonoBehaviour:
   d_Pad_Left: 0
   d_Pad_Right: 0
   rollFlag: 0
+  twoHandFlag: 0
   sprintFlag: 0
   comboFlag: 0
   lockOnFlag: 0
@@ -14394,8 +14536,8 @@ MonoBehaviour:
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: b5388e8d88baf6149a3e75b63758d045, type: 2}
   - {fileID: 11400000, guid: 1f2ab720c306a764db53261a1b9028ba, type: 2}
-  currentRightWeaponIndex: -1
-  currentLeftWeaponIndex: -1
+  currentRightWeaponIndex: 0
+  currentLeftWeaponIndex: 0
   weaponInventory: []
 --- !u!114 &2040735229
 MonoBehaviour:
@@ -14466,7 +14608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -60}
+  m_AnchoredPosition: {x: 200, y: -60}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2052541233
@@ -14516,6 +14658,42 @@ MonoBehaviour:
       - m_Target: {fileID: 1421444358}
         m_TargetAssemblyTypeName: SoulsLike.EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectRightHandSlot02
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2038354875}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 10662544}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2052541236}
+        m_TargetAssemblyTypeName: SoulsLike.HandEquipmentSlotUI, Assembly-CSharp
+        m_MethodName: SelectThisSlot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14616,8 +14794,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -437, y: 0}
-  m_SizeDelta: {x: 500, y: 750}
+  m_AnchoredPosition: {x: -267, y: 0}
+  m_SizeDelta: {x: 350, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2074125703
 MonoBehaviour:
@@ -14739,7 +14917,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2095212817}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 10662544}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2095212817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14801,8 +14991,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentOverride: {fileID: 2105706530}
+  currentWeapon: {fileID: 0}
   isLeftHandSlot: 0
   isRightHandSlot: 1
+  isBackSlot: 0
   currentWeaponModel: {fileID: 0}
 --- !u!1 &2117484267
 GameObject:
@@ -14842,7 +15034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -140}
+  m_AnchoredPosition: {x: 200, y: -140}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2117484269
@@ -14892,6 +15084,42 @@ MonoBehaviour:
       - m_Target: {fileID: 1421444358}
         m_TargetAssemblyTypeName: SoulsLike.EquipmentWindowUI, Assembly-CSharp
         m_MethodName: SelectLeftHandSlot02
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2038354875}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 10662544}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2117484272}
+        m_TargetAssemblyTypeName: SoulsLike.HandEquipmentSlotUI, Assembly-CSharp
+        m_MethodName: SelectThisSlot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15039,7 +15267,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2118308576}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1333641728}
+        m_TargetAssemblyTypeName: SoulsLike.WeaponInventorySlot, Assembly-CSharp
+        m_MethodName: EquipThisItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2038354875}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2118308576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15087,19 +15339,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1191619182204609875, guid: cf7f40555bb1ccf4cbbb5f27d1c369e1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1191619182204609875, guid: cf7f40555bb1ccf4cbbb5f27d1c369e1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5595184650427219821, guid: cf7f40555bb1ccf4cbbb5f27d1c369e1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5595184650427219821, guid: cf7f40555bb1ccf4cbbb5f27d1c369e1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5595184650839355365, guid: cf7f40555bb1ccf4cbbb5f27d1c369e1, type: 3}
       propertyPath: m_UiScaleMode
@@ -15207,7 +15459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6939083281703589003, guid: cf7f40555bb1ccf4cbbb5f27d1c369e1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf7f40555bb1ccf4cbbb5f27d1c369e1, type: 3}

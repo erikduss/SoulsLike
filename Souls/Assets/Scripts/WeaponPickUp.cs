@@ -9,6 +9,12 @@ namespace SoulsLike
     public class WeaponPickUp : Interactable
     {
         public WeaponItem weapon;
+        UIManager uiManager;
+
+        private void Awake()
+        {
+            uiManager = FindObjectOfType<UIManager>();
+        }
 
         public override void Interact(PlayerManager playerManager)
         {
@@ -36,6 +42,7 @@ namespace SoulsLike
             playerManager.itemInteractableGameObject.SetActive(true);
 
             Destroy(gameObject);
+            uiManager.UpdateUI();
         }
     }
 }
