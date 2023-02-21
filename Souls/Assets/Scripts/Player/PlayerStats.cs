@@ -47,6 +47,11 @@ namespace SoulsLike
 
         public void TakeDamage(int damage)
         {
+            if (isDead)
+            {
+                return;
+            }
+
             currentHealth = currentHealth - damage;
 
             healthBar.SetCurrentHealth(currentHealth);
@@ -57,6 +62,7 @@ namespace SoulsLike
             {
                 currentHealth = 0;
                 animatorHandler.PlayTargetAnimation("Death", true);
+                isDead = true;
                 //HANDLE PLAYER DEATH
             }
         }

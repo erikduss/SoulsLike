@@ -23,6 +23,9 @@ namespace SoulsLike
         public bool isGrounded;
         public bool canDoCombo;
 
+        public bool isUsingRightHand;
+        public bool isUsingLeftHand;
+
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
@@ -43,6 +46,9 @@ namespace SoulsLike
             float delta = Time.deltaTime;
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
+            isUsingRightHand = anim.GetBool("isUsingRightHand");
+            isUsingLeftHand = anim.GetBool("isUsingLeftHand");
+
             anim.SetBool("isInAir", isInAir);
 
             inputHandler.TickInput(delta);
