@@ -10,6 +10,7 @@ namespace SoulsLike
         Animator anim;
         CameraHandler cameraHandler;
         PlayerLocomotion playerLocomotion;
+        PlayerStats playerStats;
 
         InteractableUI interactableUI;
         public GameObject interactableUIGameObject;
@@ -26,6 +27,8 @@ namespace SoulsLike
         public bool isUsingRightHand;
         public bool isUsingLeftHand;
 
+        public bool isInvulnerable;
+
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
@@ -38,6 +41,7 @@ namespace SoulsLike
             anim = GetComponentInChildren<Animator>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
             interactableUI = FindObjectOfType<InteractableUI>();
+            playerStats = GetComponent<PlayerStats>();
         }
 
         // Update is called once per frame
@@ -48,13 +52,14 @@ namespace SoulsLike
             canDoCombo = anim.GetBool("canDoCombo");
             isUsingRightHand = anim.GetBool("isUsingRightHand");
             isUsingLeftHand = anim.GetBool("isUsingLeftHand");
+            isInvulnerable = anim.GetBool("isInvulnerable");
 
             anim.SetBool("isInAir", isInAir);
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleJumping();
-            
+            playerStats.RegenerateStamina();
 
             CheckForInteractableObject();
         }

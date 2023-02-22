@@ -11,8 +11,12 @@ namespace SoulsLike
         public int currentHealth;
 
         public int staminaLevel = 10;
-        public int maxStamina;
-        public int currentStamina;
+        public float maxStamina;
+        public float currentStamina;
+
+        public int focusLevel = 10;
+        public float maxFocusPoints;
+        public float currentFocusPoints;
 
         public bool isDead;
     }
