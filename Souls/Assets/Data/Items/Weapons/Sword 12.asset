@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b7d3f1edc44b244bd447e0a6ec48f7, type: 3}
+  m_Name: Sword 12
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 254e9190b43a42d47a821d8bce0e593b, type: 3}
+  itemName: Sword
+  modelPrefab: {fileID: 8939983847002099210, guid: 485246699a31ada49bcd262a1a324ef8, type: 3}
+  isUnarmed: 0
+  right_Hand_Idle: Right_Arm_Idle_01
+  left_Hand_Idle: Left_Arm_Idle_01
+  th_Idle: TH_Idle_01
+  OH_Light_Attack_01: OH_Light_Attack_01
+  OH_Light_Attack_02: OH_Light_Attack_02
+  OH_Heavy_Attack_01: OH_Heavy_Attack_01
+  th_light_attack_01: TH_Light_Attack_01
+  th_light_attack_02: TH_Light_Attack_02
+  baseStamina: 20
+  lightAttackMultiplier: 1
+  heavyAttackMultiplier: 2
+  isSpellCaster: 0
+  isFaithCaster: 0
+  isPyroCaster: 0
+  isMeleeWeapon: 1
