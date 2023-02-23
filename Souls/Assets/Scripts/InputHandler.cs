@@ -139,15 +139,7 @@ namespace SoulsLike
 
             if (rt_Input)
             {
-                if (playerManager.isInteracting)
-                {
-                    return;
-                }
-                if (playerManager.canDoCombo)
-                {
-                    return;
-                }
-                playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+                playerAttacker.HandleRTAction();
             }
         }
 

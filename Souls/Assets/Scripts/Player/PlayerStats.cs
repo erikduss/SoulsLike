@@ -90,7 +90,6 @@ namespace SoulsLike
         {
             currentStamina = currentStamina - damage;
             staminaBar.SetCurrentStamina(currentStamina);
-            Debug.Log(currentStamina);
         }
 
         public void RegenerateStamina()

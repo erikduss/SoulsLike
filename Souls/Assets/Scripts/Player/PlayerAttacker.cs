@@ -38,6 +38,10 @@ namespace SoulsLike
                 {
                     animatorHandler.PlayTargetAnimation(weapon.th_light_attack_02, true);
                 }
+                else if(lastAttack == weapon.OH_Heavy_Attack_01)
+                {
+                    animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_02, true);
+                }
             }
         }
 
@@ -84,6 +88,18 @@ namespace SoulsLike
                 PerformRBMagicAction(playerInventory.rightWeapon);
             }
         }
+
+        public void HandleRTAction()
+        {
+            if (playerInventory.rightWeapon.isMeleeWeapon)
+            {
+                PerformRTMeleeAction();
+            }
+            else if (playerInventory.rightWeapon.isSpellCaster || playerInventory.rightWeapon.isFaithCaster || playerInventory.rightWeapon.isPyroCaster)
+            {
+                PerformRBMagicAction(playerInventory.rightWeapon);
+            }
+        }
         #endregion
 
         #region Attack Actions
@@ -107,6 +123,29 @@ namespace SoulsLike
                 }
                 animatorHandler.anim.SetBool("isUsingRightHand", true);
                 HandleLightAttack(playerInventory.rightWeapon);
+            }
+        }
+
+        private void PerformRTMeleeAction()
+        {
+            if (playerManager.canDoCombo)
+            {
+                inputHandler.comboFlag = true;
+                HandleWeaponCombo(playerInventory.rightWeapon);
+                inputHandler.comboFlag = false;
+            }
+            else
+            {
+                if (playerManager.isInteracting)
+                {
+                    return;
+                }
+                if (playerManager.canDoCombo)
+                {
+                    return;
+                }
+                animatorHandler.anim.SetBool("isUsingRightHand", true);
+                HandleHeavyAttack(playerInventory.rightWeapon);
             }
         }
 
