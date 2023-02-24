@@ -27,6 +27,11 @@ namespace SoulsLike
 
         public void HandleWeaponCombo(WeaponItem weapon)
         {
+            if (playerStats.currentStamina <= 0)
+            {
+                return;
+            }
+
             if (inputHandler.comboFlag)
             {
                 animatorHandler.anim.SetBool("canDoCombo", false);
@@ -48,6 +53,11 @@ namespace SoulsLike
 
         public void HandleLightAttack(WeaponItem weapon)
         {
+            if (playerStats.currentStamina <= 0)
+            {
+                return;
+            }
+
             weaponSlotManager.attackingWeapon = weapon;
 
             if (inputHandler.twoHandFlag)
@@ -64,6 +74,11 @@ namespace SoulsLike
 
         public void HandleHeavyAttack(WeaponItem weapon)
         {
+            if (playerStats.currentStamina <= 0)
+            {
+                return;
+            }
+
             weaponSlotManager.attackingWeapon = weapon;
 
             if (inputHandler.twoHandFlag)
@@ -181,6 +196,11 @@ namespace SoulsLike
 
         public void AttemptBackStabOrRiposte()
         {
+            if (playerStats.currentStamina <= 0)
+            {
+                return;
+            }
+
             RaycastHit hit;
 
             if(Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))

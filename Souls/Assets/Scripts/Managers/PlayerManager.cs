@@ -10,6 +10,7 @@ namespace SoulsLike
         Animator anim;
         CameraHandler cameraHandler;
         PlayerLocomotion playerLocomotion;
+        PlayerAnimatorManager playerAnimatorManager;
         PlayerStats playerStats;
 
         InteractableUI interactableUI;
@@ -33,16 +34,18 @@ namespace SoulsLike
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
             backStabCollider = GetComponentInChildren<BackStabCollider>();
+            inputHandler = GetComponent<InputHandler>();
+            playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
+            anim = GetComponentInChildren<Animator>();
+            playerLocomotion = GetComponent<PlayerLocomotion>();
+            interactableUI = FindObjectOfType<InteractableUI>();
+            playerStats = GetComponent<PlayerStats>();
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            inputHandler = GetComponent<InputHandler>();
-            anim = GetComponentInChildren<Animator>();
-            playerLocomotion = GetComponent<PlayerLocomotion>();
-            interactableUI = FindObjectOfType<InteractableUI>();
-            playerStats = GetComponent<PlayerStats>();
+            
         }
 
         // Update is called once per frame
@@ -59,6 +62,7 @@ namespace SoulsLike
             anim.SetBool("isDead", playerStats.isDead);
 
             inputHandler.TickInput(delta);
+            playerAnimatorManager.canRotate = anim.GetBool("canRotate");
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleJumping();
             playerStats.RegenerateStamina();
@@ -71,6 +75,7 @@ namespace SoulsLike
             float delta = Time.fixedDeltaTime;
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+            playerLocomotion.HandleRotation(delta);
         }
 
         private void LateUpdate()
