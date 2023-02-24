@@ -7,11 +7,19 @@ namespace SoulsLike
     public class EnemyAnimatorManager : AnimatorManager
     {
         EnemyManager enemyManager;
+        EnemyStats enemyStats;
 
         private void Awake()
         {
             anim = GetComponent<Animator>();
             enemyManager = GetComponentInParent<EnemyManager>();
+            enemyStats = GetComponentInParent<EnemyStats>();
+        }
+
+        public override void TakeCriticalDamageAnimationEvent()
+        {
+            enemyStats.TakeDamage(enemyManager.pendingCriticalDamage,false);
+            enemyManager.pendingCriticalDamage = 0;
         }
 
         private void OnAnimatorMove()

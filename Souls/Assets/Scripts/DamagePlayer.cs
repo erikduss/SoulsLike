@@ -15,7 +15,7 @@ namespace SoulsLike
 
             if(playerStats != null)
             {
-                playerStats.TakeDamage(damage);
+                playerStats.TakeDamage(damage,true);
             }
         }
     }

@@ -46,7 +46,7 @@ namespace SoulsLike
         PlayerManager playerManager;
         WeaponSlotManager weaponSlotManager;
         CameraHandler cameraHandler;
-        AnimatorHandler animatorHandler;
+        PlayerAnimatorManager animatorHandler;
         UIManager uiManager;
 
         Vector2 movementInput;
@@ -60,7 +60,7 @@ namespace SoulsLike
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             uiManager = FindObjectOfType<UIManager>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
         }
 
         public void OnEnable()

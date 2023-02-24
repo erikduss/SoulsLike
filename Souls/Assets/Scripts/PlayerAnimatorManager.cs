@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace SoulsLike
 {
-    public class AnimatorHandler : AnimatorManager
+    public class PlayerAnimatorManager : AnimatorManager
     {
         PlayerManager playerManager;
+        PlayerStats playerStats;
         
         private InputHandler inputHandler;
         private PlayerLocomotion playerLocomotion;
@@ -17,6 +18,7 @@ namespace SoulsLike
         public void Initialize()
         {
             playerManager = GetComponentInParent<PlayerManager>();
+            playerStats = GetComponentInParent<PlayerStats>();
             anim = GetComponent<Animator>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
@@ -116,6 +118,12 @@ namespace SoulsLike
         public void DisableIsInvulnerable()
         {
             anim.SetBool("isInvulnerable", false);
+        }
+
+        public override void TakeCriticalDamageAnimationEvent()
+        {
+            playerStats.TakeDamage(playerManager.pendingCriticalDamage,false);
+            playerManager.pendingCriticalDamage = 0;
         }
 
         private void OnAnimatorMove()

@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1742029495350624094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19d503c38b6b9ed4192286e3d549502b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e7bf00c276b23a4799a2d884298de98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
@@ -1223,6 +1223,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackingWeapon: {fileID: 0}
+  leftHandDamageCollider: {fileID: 0}
+  rightHandDamageCollider: {fileID: 0}
 --- !u!114 &1835801120600420489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3530,6 +3532,7 @@ MonoBehaviour:
   lockOnTransform: {fileID: 3647931938297488521}
   backStabBoxTrigger: {fileID: 0}
   backStabCollider: {fileID: 1653300353}
+  pendingCriticalDamage: 0
   interactableUIGameObject: {fileID: 0}
   itemInteractableGameObject: {fileID: 0}
   isInteracting: 0

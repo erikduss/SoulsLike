@@ -56,6 +56,7 @@ namespace SoulsLike
             isInvulnerable = anim.GetBool("isInvulnerable");
 
             anim.SetBool("isInAir", isInAir);
+            anim.SetBool("isDead", playerStats.isDead);
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);

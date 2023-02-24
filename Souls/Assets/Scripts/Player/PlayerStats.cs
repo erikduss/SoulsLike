@@ -11,7 +11,7 @@ namespace SoulsLike
         StaminaBar staminaBar;
         FocusPointBar focusPointBar;
 
-        AnimatorHandler animatorHandler;
+        PlayerAnimatorManager animatorHandler;
 
         public float staminaRegenerationAmount = 1f;
         private float staminaRegenerationTimer = 0;
@@ -22,7 +22,7 @@ namespace SoulsLike
             healthBar = FindObjectOfType<HealthBar>();
             staminaBar = FindObjectOfType<StaminaBar>();
             focusPointBar = FindObjectOfType<FocusPointBar>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
         }
 
         void Start()
@@ -63,7 +63,7 @@ namespace SoulsLike
             return maxFocusPoints;
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, bool playAnimation)
         {
             if (playerManager.isInvulnerable) return;
             if (isDead)
@@ -75,12 +75,12 @@ namespace SoulsLike
 
             healthBar.SetCurrentHealth(currentHealth);
 
-            animatorHandler.PlayTargetAnimation("Take Damage", true);
+            if (playAnimation) animatorHandler.PlayTargetAnimation("Take Damage", true);
 
             if(currentHealth <= 0)
             {
                 currentHealth = 0;
-                animatorHandler.PlayTargetAnimation("Death", true);
+                if (playAnimation) animatorHandler.PlayTargetAnimation("Death", true);
                 isDead = true;
                 //HANDLE PLAYER DEATH
             }

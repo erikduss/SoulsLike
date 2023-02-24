@@ -36,7 +36,7 @@ namespace SoulsLike
 
                 if(playerStats != null)
                 {
-                    playerStats.TakeDamage(currentWeaponDamage);
+                    playerStats.TakeDamage(currentWeaponDamage,true);
                 }
             }
 
@@ -46,7 +46,7 @@ namespace SoulsLike
 
                 if (enemyStats != null)
                 {
-                    enemyStats.TakeDamage(currentWeaponDamage);
+                    enemyStats.TakeDamage(currentWeaponDamage,true);
                 }
             }
         }
