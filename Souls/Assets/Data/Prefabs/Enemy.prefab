@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885319528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0.3}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -751,14 +751,16 @@ MonoBehaviour:
   lockOnTransform: {fileID: 8568119054669795602}
   backStabCollider: {fileID: 9206589325577762968}
   riposteCollider: {fileID: 885319530}
-  canBeRiposted: 1
+  canBeRiposted: 0
+  canBeParried: 0
+  isParrying: 0
   pendingCriticalDamage: 0
   navmeshAgent: {fileID: 0}
   isPerformingAction: 0
   isInteracting: 0
   rotationSpeed: 15
-  maximumAttackRange: 1.5
-  currentState: {fileID: 0}
+  maximumAttackRange: 2.5
+  currentState: {fileID: 5433807976711801268}
   currentTarget: {fileID: 0}
   enemyRigidbody: {fileID: 0}
   detectionRadius: 20

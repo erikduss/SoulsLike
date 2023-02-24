@@ -3563,6 +3563,7 @@ MonoBehaviour:
   y_Input: 0
   rb_Input: 0
   rt_Input: 0
+  lt_Input: 0
   critical_Attack_Input: 0
   jump_Input: 0
   inventory_Input: 0
@@ -3626,6 +3627,8 @@ MonoBehaviour:
   backStabCollider: {fileID: 1653300354}
   riposteCollider: {fileID: 352905207}
   canBeRiposted: 0
+  canBeParried: 0
+  isParrying: 0
   pendingCriticalDamage: 0
   interactableUIGameObject: {fileID: 0}
   itemInteractableGameObject: {fileID: 0}
@@ -3654,10 +3657,10 @@ MonoBehaviour:
   leftWeapon: {fileID: 11400000, guid: b5388e8d88baf6149a3e75b63758d045, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: f6b6f11d7ea982749908ff64c1beb641, type: 2}
   weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: d4938f582c98d6a4a90ed677836c4cde, type: 2}
-  - {fileID: 11400000, guid: 37d0c8dcb1a4b674db9e99a91e7171f7, type: 2}
-  weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: 77911fae6b872b945b9b5f444beca696, type: 2}
+  - {fileID: 11400000, guid: d4938f582c98d6a4a90ed677836c4cde, type: 2}
+  weaponsInLeftHandSlots:
+  - {fileID: 11400000, guid: e2620272fd5c8d8438dbc2cebde8b4e7, type: 2}
   - {fileID: 11400000, guid: d6a183297aee778498049995fe2defb0, type: 2}
   currentRightWeaponIndex: 0
   currentLeftWeaponIndex: 0
@@ -3674,7 +3677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85940997ca3b06d42849dec661606835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 10
+  healthLevel: 100
   maxHealth: 0
   currentHealth: 0
   staminaLevel: 10
