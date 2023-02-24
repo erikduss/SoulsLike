@@ -35,6 +35,7 @@ namespace SoulsLike
             navmeshAgent = GetComponentInChildren<NavMeshAgent>();
             enemyStats = GetComponent<EnemyStats>();
             enemyRigidbody = GetComponent<Rigidbody>();
+            backStabCollider = GetComponentInChildren<BackStabCollider>();
             navmeshAgent.enabled = false;
         }
 

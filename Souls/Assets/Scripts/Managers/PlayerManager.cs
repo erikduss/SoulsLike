@@ -32,6 +32,7 @@ namespace SoulsLike
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
+            backStabCollider = GetComponentInChildren<BackStabCollider>();
         }
 
         // Start is called before the first frame update

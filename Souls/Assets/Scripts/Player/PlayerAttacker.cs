@@ -14,6 +14,7 @@ namespace SoulsLike
         WeaponSlotManager weaponSlotManager;
         public string lastAttack;
 
+        LayerMask backStabLayer = 1 << 14;
         private void Awake()
         {
             animatorHandler = GetComponent<AnimatorHandler>();
@@ -177,5 +178,35 @@ namespace SoulsLike
             playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
         }
         #endregion
+
+        public void AttemptBackStabOrRiposte()
+        {
+            RaycastHit hit;
+
+            if(Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
+            {
+                CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+
+                if(enemyCharacterManager != null)
+                {
+                    //Check for team ID (so you cant back stab friends or yourself?)
+                    playerManager.transform.position = enemyCharacterManager.backStabCollider.backStabberStandPoint.position;
+                    Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
+                    rotationDirection = hit.transform.position - playerManager.transform.position;
+                    rotationDirection.y = 0;
+                    rotationDirection.Normalize();
+                    Quaternion tr = Quaternion.LookRotation(rotationDirection);
+                    Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+                    playerManager.transform.rotation = targetRotation;
+                    //pull us into a transform behind the enemy so the backstab looks clean
+                    animatorHandler.PlayTargetAnimation("Back Stab", true);
+                    enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Back Stabbed", true);
+                    //rotate towards the transform
+                    //play animation
+                    //make enemny play animation
+                    //do damage
+                }
+            }
+        }
     }
 }
