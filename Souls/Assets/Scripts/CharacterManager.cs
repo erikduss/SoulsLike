@@ -10,8 +10,11 @@ namespace SoulsLike
         public Transform lockOnTransform;
 
         [Header("Combat Colliders")]
-        public BoxCollider backStabBoxTrigger;
-        public BackStabCollider backStabCollider;
+        public CriticalDamageCollider backStabCollider;
+        public CriticalDamageCollider riposteCollider;
+
+        [Header("Combat Flags")]
+        public bool canBeRiposted;
 
         //damage will be inflicted during an animation event
         //used in backstab or riposite animations

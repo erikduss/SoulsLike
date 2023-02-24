@@ -31,6 +31,65 @@ Transform:
   m_Father: {fileID: 670064343}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &352905205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 352905206}
+  - component: {fileID: 352905208}
+  - component: {fileID: 352905207}
+  m_Layer: 15
+  m_Name: Riposte Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &352905206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352905205}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3647931938606413844}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &352905208
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352905205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6230348, y: 1, z: 0.0301199}
+  m_Center: {x: 0.02457246, y: 0, z: 0.0314172}
+--- !u!114 &352905207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352905205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd00268992ebcc448c14daf18acc0c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  criticalDamagerStandPosition: {fileID: 702016283}
 --- !u!1 &597701817
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +151,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 61760901}
+  - {fileID: 702016283}
   m_Father: {fileID: 3647931939371609500}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -125,6 +185,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 597701818}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &702016282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 702016283}
+  m_Layer: 13
+  m_Name: Riposter Standing Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &702016283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702016282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 670064343}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1653300351
 GameObject:
@@ -184,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd00268992ebcc448c14daf18acc0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backStabberStandPoint: {fileID: 61760901}
+  criticalDamagerStandPosition: {fileID: 61760901}
 --- !u!1 &1741219881031048712
 GameObject:
   m_ObjectHideFlags: 0
@@ -3373,6 +3464,7 @@ Transform:
   m_Children:
   - {fileID: 3647931937474984289}
   - {fileID: 1653300352}
+  - {fileID: 352905206}
   m_Father: {fileID: 3647931939371609500}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3515,6 +3607,7 @@ MonoBehaviour:
   sprintSpeed: 5
   rotationSpeed: 10
   fallingSpeed: 300
+  rollStaminaCost: 15
   characterCollider: {fileID: 3647931939371609490}
   characterCollisionBlockerCollider: {fileID: 3647931937474984294}
 --- !u!114 &3647931939371609489
@@ -3530,8 +3623,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 3647931938297488521}
-  backStabBoxTrigger: {fileID: 0}
-  backStabCollider: {fileID: 1653300353}
+  backStabCollider: {fileID: 1653300354}
+  riposteCollider: {fileID: 352905207}
+  canBeRiposted: 0
   pendingCriticalDamage: 0
   interactableUIGameObject: {fileID: 0}
   itemInteractableGameObject: {fileID: 0}
@@ -3589,5 +3683,6 @@ MonoBehaviour:
   focusLevel: 10
   maxFocusPoints: 0
   currentFocusPoints: 0
+  soulCount: 0
   isDead: 0
   staminaRegenerationAmount: 30
