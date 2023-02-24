@@ -129,5 +129,10 @@ namespace SoulsLike
 
             focusPointBar.SetCurrentFocusPoints(currentFocusPoints);
         }
+
+        public void AddSouls(int souls)
+        {
+            soulCount = soulCount + souls;
+        }
     }
 }

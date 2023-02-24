@@ -6,11 +6,13 @@ namespace SoulsLike
 {
     public class EnemyStats : CharacterStats
     {
-        Animator animator;
+        EnemyAnimatorManager enemyAnimatorManager;
+
+        public int soulsAwardedOnDeath = 50;
 
         private void Awake()
         {
-            animator = GetComponentInChildren<Animator>();
+            enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         }
 
         void Start()
@@ -34,14 +36,19 @@ namespace SoulsLike
             }
             currentHealth = currentHealth - damage;
 
-            if(playAnimation) animator.Play("Take Damage");
+            if(playAnimation) enemyAnimatorManager.PlayTargetAnimation("Take Damage", true);
 
             if (currentHealth <= 0)
             {
-                currentHealth = 0;
-                if (playAnimation) animator.Play("Death");
-                isDead = true;
+                HandleDeath(playAnimation);
             }
+        }
+
+        private void HandleDeath(bool playDeathAnimation)
+        {
+            currentHealth = 0;
+            if (playDeathAnimation) enemyAnimatorManager.PlayTargetAnimation("Death", true);
+            isDead = true;
         }
     }
 }
