@@ -105,6 +105,8 @@ namespace SoulsLike
             }
         }
 
+        #region Player Interactions
+
         public void CheckForInteractableObject()
         {
             RaycastHit hit;
@@ -142,5 +144,14 @@ namespace SoulsLike
                 }
             }
         }
+
+        public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
+        {
+            playerLocomotion.rigidbody.velocity = Vector3.zero; //Stop the player from sliding
+            transform.position = playerStandsHereWhenOpeningChest.transform.position;
+            playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
+        }
+
+        #endregion
     }
 }
