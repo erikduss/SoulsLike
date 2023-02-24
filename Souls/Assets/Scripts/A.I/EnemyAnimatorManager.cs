@@ -22,6 +22,36 @@ namespace SoulsLike
             enemyManager.pendingCriticalDamage = 0;
         }
 
+        public void CanRotate()
+        {
+            anim.SetBool("canRotate", true);
+        }
+
+        public void StopRotation()
+        {
+            anim.SetBool("canRotate", false);
+        }
+
+        public void EnableIsParrying()
+        {
+            enemyManager.isParrying = true;
+        }
+
+        public void DisableIsParrying()
+        {
+            enemyManager.isParrying = false;
+        }
+
+        public void EnableCanbeRiposted()
+        {
+            enemyManager.canBeRiposted = true;
+        }
+
+        public void DisableCanbeRiposted()
+        {
+            enemyManager.canBeRiposted = false;
+        }
+
         public void AwardSoulsOnDeath()
         {
             //scan for every player in the scene and award them souls
@@ -37,8 +67,6 @@ namespace SoulsLike
                     soulCountBar.SetSoulCountText(playerStats.soulCount);
                 }
             }
-
-            
         }
 
         private void OnAnimatorMove()

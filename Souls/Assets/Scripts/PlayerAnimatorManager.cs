@@ -119,6 +119,26 @@ namespace SoulsLike
             anim.SetBool("isInvulnerable", false);
         }
 
+        public void EnableIsParrying()
+        {
+            playerManager.isParrying = true;
+        }
+
+        public void DisableIsParrying()
+        {
+            playerManager.isParrying = false;
+        }
+
+        public void EnableCanbeRiposted()
+        {
+            playerManager.canBeRiposted = true;
+        }
+
+        public void DisableCanbeRiposted()
+        {
+            playerManager.canBeRiposted = false;
+        }
+
         public override void TakeCriticalDamageAnimationEvent()
         {
             playerStats.TakeDamage(playerManager.pendingCriticalDamage,false);

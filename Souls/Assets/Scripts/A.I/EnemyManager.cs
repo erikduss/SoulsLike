@@ -53,6 +53,7 @@ namespace SoulsLike
 
         private void FixedUpdate()
         {
+            if (canBeRiposted) return;
             HandleStateMachine();
         }
 

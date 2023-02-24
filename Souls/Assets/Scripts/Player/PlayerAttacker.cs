@@ -117,6 +117,19 @@ namespace SoulsLike
                 PerformRBMagicAction(playerInventory.rightWeapon);
             }
         }
+
+        public void HandleLTAction()
+        {
+            if (playerInventory.leftWeapon.isShieldWeapon)
+            {
+                PerformLTWeaponArt(inputHandler.twoHandFlag);
+                //perform shield weapon art
+            }
+            else if (playerInventory.leftWeapon.isMeleeWeapon)
+            {
+                //do light attack
+            }
+        }
         #endregion
 
         #region Attack Actions
@@ -186,6 +199,20 @@ namespace SoulsLike
                         //stun animation
                     }
                 }
+            }
+        }
+
+        private void PerformLTWeaponArt(bool isTwoHanding)
+        {
+            if (playerManager.isInteracting) return;
+
+            if (isTwoHanding)
+            {
+                //if we are 2handing perform weapon art for the right weapon
+            }
+            else
+            {
+                animatorHandler.PlayTargetAnimation(playerInventory.leftWeapon.weapon_Art, true);
             }
         }
 

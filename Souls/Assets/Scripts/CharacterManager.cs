@@ -15,6 +15,8 @@ namespace SoulsLike
 
         [Header("Combat Flags")]
         public bool canBeRiposted;
+        public bool canBeParried;
+        public bool isParrying;
 
         //damage will be inflicted during an animation event
         //used in backstab or riposite animations
