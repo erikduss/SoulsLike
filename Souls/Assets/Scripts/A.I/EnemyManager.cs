@@ -31,6 +31,10 @@ namespace SoulsLike
 
         public float currentRecoveryTime = 0;
 
+        [Header("A.I Combat Settings")]
+        public bool allowAIToPerformCombos;
+        public float comboLikelyHood;
+
         private void Awake()
         {
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
