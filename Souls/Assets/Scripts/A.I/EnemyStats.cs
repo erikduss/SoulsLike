@@ -8,6 +8,8 @@ namespace SoulsLike
     {
         EnemyAnimatorManager enemyAnimatorManager;
 
+        public UIEnemyHealthBar enemyHealthBar;
+
         public int soulsAwardedOnDeath = 50;
 
         private void Awake()
@@ -19,6 +21,7 @@ namespace SoulsLike
         {
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
+            enemyHealthBar.SetMaxHealth(maxHealth);
         }
 
         private int SetMaxHealthFromHealthLevel()
@@ -35,6 +38,7 @@ namespace SoulsLike
                 return;
             }
             currentHealth = currentHealth - damage;
+            enemyHealthBar.SetHealth(currentHealth);
 
             if(playAnimation) enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
