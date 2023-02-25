@@ -9,6 +9,11 @@ namespace SoulsLike
         public CombatStanceState combatStanceState;
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimationManager)
         {
+            if (enemyManager.isInteracting)
+            {
+                return this;
+            }
+
             if (enemyManager.isPerformingAction)
             {
                 enemyAnimationManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
@@ -25,8 +30,6 @@ namespace SoulsLike
             }
 
             HandleRotateTowardsTarget(enemyManager);
-            enemyManager.navmeshAgent.transform.localPosition = Vector3.zero;
-            enemyManager.navmeshAgent.transform.localRotation = Quaternion.identity;
 
             if(distanceFromTarget <= enemyManager.maximumAttackRange)
             {

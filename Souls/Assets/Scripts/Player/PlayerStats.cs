@@ -63,7 +63,7 @@ namespace SoulsLike
             return maxFocusPoints;
         }
 
-        public void TakeDamage(int damage, bool playAnimation)
+        public void TakeDamage(int damage, bool playAnimation, string damageAnimation = "Take Damage")
         {
             if (playerManager.isInvulnerable) return;
             if (isDead)
@@ -75,7 +75,7 @@ namespace SoulsLike
 
             healthBar.SetCurrentHealth(currentHealth);
 
-            if (playAnimation) animatorHandler.PlayTargetAnimation("Take Damage", true);
+            if (playAnimation) animatorHandler.PlayTargetAnimation(damageAnimation, true);
 
             if(currentHealth <= 0)
             {

@@ -11,6 +11,11 @@ namespace SoulsLike
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimationManager)
         {
+            if (enemyManager.isInteracting)
+            {
+                return this;
+            }
+
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 
             //potentially circle player or walk around them

@@ -7,6 +7,7 @@ namespace SoulsLike
     public class PlayerAttacker : MonoBehaviour
     {
         PlayerAnimatorManager animatorHandler;
+        PlayerEquipmentManager playerEquipmentManager;
         PlayerManager playerManager;
         PlayerStats playerStats;
         PlayerInventory playerInventory;
@@ -19,6 +20,7 @@ namespace SoulsLike
         private void Awake()
         {
             animatorHandler = GetComponent<PlayerAnimatorManager>();
+            playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
             playerManager = GetComponentInParent<PlayerManager>();
             playerStats = GetComponentInParent<PlayerStats>();
             playerInventory = GetComponentInParent<PlayerInventory>();
@@ -116,6 +118,11 @@ namespace SoulsLike
             {
                 PerformRBMagicAction(playerInventory.rightWeapon);
             }
+        }
+
+        public void HandleLBAction()
+        {
+            PerformLBBlockingAction();
         }
 
         public void HandleLTAction()
@@ -219,6 +226,22 @@ namespace SoulsLike
         private void SuccessfullyCastSpell()
         {
             playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
+        }
+        #endregion
+
+        #region Defense Actions
+        private void PerformLBBlockingAction()
+        {
+            if (playerManager.isInteracting)
+            {
+                return;
+            }
+
+            if (playerManager.isBlocking) return;
+
+            animatorHandler.PlayTargetAnimation("Block_Start", false, true);
+            playerEquipmentManager.OpenBlockingCollider();
+            playerManager.isBlocking = true;
         }
         #endregion
 

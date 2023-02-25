@@ -28,7 +28,7 @@ namespace SoulsLike
             return maxHealth;
         }
 
-        public void TakeDamage(int damage, bool playAnimation)
+        public void TakeDamage(int damage, bool playAnimation, string damageAnimation = "Take Damage")
         {
             if (isDead)
             {
@@ -36,7 +36,7 @@ namespace SoulsLike
             }
             currentHealth = currentHealth - damage;
 
-            if(playAnimation) enemyAnimatorManager.PlayTargetAnimation("Take Damage", true);
+            if(playAnimation) enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
             if (currentHealth <= 0)
             {

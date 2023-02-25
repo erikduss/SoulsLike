@@ -24,10 +24,8 @@ namespace SoulsLike
         public bool isInAir;
         public bool isGrounded;
         public bool canDoCombo;
-
         public bool isUsingRightHand;
         public bool isUsingLeftHand;
-
         public bool isInvulnerable;
 
         private void Awake()
@@ -59,6 +57,7 @@ namespace SoulsLike
             isUsingLeftHand = anim.GetBool("isUsingLeftHand");
             isInvulnerable = anim.GetBool("isInvulnerable");
 
+            anim.SetBool("isBlocking", isBlocking);
             anim.SetBool("isInAir", isInAir);
             anim.SetBool("isDead", playerStats.isDead);
 

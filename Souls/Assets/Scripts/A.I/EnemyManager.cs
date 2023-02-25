@@ -21,6 +21,9 @@ namespace SoulsLike
         public CharacterStats currentTarget;
         public Rigidbody enemyRigidbody;
 
+        [Header("Combat Flags")]
+        public bool canDoCombo;
+
         [Header("A.I Settings")]
         public float detectionRadius = 20;
         public float maximumDetectionAngle = 50;
@@ -46,15 +49,18 @@ namespace SoulsLike
         private void Update()
         {
             HandleRecoveryTime();
+            //if (canBeRiposted) return;
+            HandleStateMachine();
 
             isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
+            canDoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
             enemyAnimationManager.anim.SetBool("isDead", enemyStats.isDead);
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
-            if (canBeRiposted) return;
-            HandleStateMachine();
+            navmeshAgent.transform.localPosition = Vector3.zero;
+            navmeshAgent.transform.localRotation = Quaternion.identity;
         }
 
         private void HandleStateMachine()
