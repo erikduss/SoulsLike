@@ -17694,6 +17694,10 @@ PrefabInstance:
       propertyPath: itemInteractableGameObject
       value: 
       objectReference: {fileID: 8601294231024793875}
+    - target: {fileID: 3647931939371609494, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
+      propertyPath: weaponsInRightHandSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 77911fae6b872b945b9b5f444beca696, type: 2}
     - target: {fileID: 3647931939371609500, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
       propertyPath: m_RootOrder
       value: 1
