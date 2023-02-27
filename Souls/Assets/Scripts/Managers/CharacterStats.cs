@@ -21,5 +21,10 @@ namespace SoulsLike
         public int soulCount = 0;
 
         public bool isDead;
+
+        public virtual void TakeDamage(int damage, bool playAnimation, string damageAnimation = "Take Damage")
+        {
+
+        }
     }
 }

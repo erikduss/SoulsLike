@@ -8,6 +8,7 @@ namespace SoulsLike
     {
         public CharacterManager characterManager;
         Collider damageCollider;
+        public bool enabledDamageColliderOnStartup = false;
 
         public int currentWeaponDamage = 25;
 
@@ -16,7 +17,7 @@ namespace SoulsLike
             damageCollider = GetComponent<Collider>();
             damageCollider.gameObject.SetActive(true);
             damageCollider.isTrigger = true;
-            damageCollider.enabled = false;
+            damageCollider.enabled = enabledDamageColliderOnStartup;
         }
 
         public void EnableDamageCollider()

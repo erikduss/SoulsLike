@@ -31,7 +31,7 @@ namespace SoulsLike
             return maxHealth;
         }
 
-        public void TakeDamage(int damage, bool playAnimation, string damageAnimation = "Take Damage")
+        public override void TakeDamage(int damage, bool playAnimation, string damageAnimation = "Take Damage")
         {
             if (isDead)
             {

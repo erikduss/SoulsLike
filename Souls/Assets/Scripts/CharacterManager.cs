@@ -19,6 +19,9 @@ namespace SoulsLike
         public bool isParrying;
         public bool isBlocking;
 
+        [Header("Spells")]
+        public bool isFiringSpell;
+
         //damage will be inflicted during an animation event
         //used in backstab or riposite animations
         public int pendingCriticalDamage;
