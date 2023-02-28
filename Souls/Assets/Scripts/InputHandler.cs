@@ -14,6 +14,7 @@ namespace SoulsLike
 
         public bool b_Input;
         public bool a_Input;
+        public bool x_Input;
         public bool y_Input;
         public bool rb_Input;
         public bool rt_Input;
@@ -46,6 +47,7 @@ namespace SoulsLike
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        PlayerEffectsManager playerEffectsManager;
         PlayerStats playerStats;
         BlockingCollider blockingCollider;
         WeaponSlotManager weaponSlotManager;
@@ -67,6 +69,7 @@ namespace SoulsLike
             cameraHandler = FindObjectOfType<CameraHandler>();
             uiManager = FindObjectOfType<UIManager>();
             animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
+            playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
         }
 
         public void OnEnable()
@@ -84,6 +87,7 @@ namespace SoulsLike
                 inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
                 inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true; 
                 inputActions.PlayerActions.A.performed += i => a_Input = true;
+                inputActions.PlayerActions.X.performed += i => x_Input = true;
                 inputActions.PlayerActions.Roll.performed += i => b_Input = true;
                 inputActions.PlayerActions.Roll.canceled += i => b_Input = false;
                 inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
@@ -113,6 +117,7 @@ namespace SoulsLike
             HandleLockOnInput();
             HandleTwoHandInput();
             HandleCriticalAttackInput();
+            HandleUseConsumableInput();
         }
 
         private void HandleMoveInput(float delta)
@@ -302,5 +307,13 @@ namespace SoulsLike
             }
         }
     
+        private void HandleUseConsumableInput()
+        {
+            if (x_Input)
+            {
+                x_Input = false;
+                playerInventory.currentConsumable.AttemptToConsumeItem(animatorHandler, weaponSlotManager, playerEffectsManager);
+            }
+        }
     }
 }

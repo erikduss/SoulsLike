@@ -10859,6 +10859,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockingCollider: {fileID: 972503614}
+--- !u!114 &1359870798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359870791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bf6f92d7fd1194385d9224b06f4ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentParticleFX: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
+  amountToBeHealed: 0
 --- !u!1 &1383622524
 GameObject:
   m_ObjectHideFlags: 0
@@ -17698,6 +17713,10 @@ PrefabInstance:
       propertyPath: currentSpell
       value: 
       objectReference: {fileID: 11400000, guid: 770adc5551463d24cad93e5772251b69, type: 2}
+    - target: {fileID: 3647931939371609494, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
+      propertyPath: currentConsumable
+      value: 
+      objectReference: {fileID: 11400000, guid: 9130992cf727e9c4d92985a01dc5fe6e, type: 2}
     - target: {fileID: 3647931939371609494, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
       propertyPath: weaponsInRightHandSlots.Array.data[0]
       value: 
