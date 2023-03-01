@@ -292,7 +292,7 @@ namespace SoulsLike
                     enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
                     animatorHandler.PlayTargetAnimation("Back Stab", true);
-                    enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Back Stabbed", true);
+                    enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimationWithRootRotation("Back Stabbed", true);
                 }
             }
             else if (Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 1f, riposteLayer))
