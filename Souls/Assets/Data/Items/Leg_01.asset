@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
   itemName: Leg_01
-  physicalDefense: 0
+  physicalDefense: 10
   hipModelName: SM_Item_Bags
   leftLegName: 
   rightLegName: 

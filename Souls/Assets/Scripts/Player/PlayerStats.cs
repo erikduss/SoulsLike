@@ -66,12 +66,8 @@ namespace SoulsLike
         public override void TakeDamage(int damage, bool playAnimation, string damageAnimation = "Take Damage")
         {
             if (playerManager.isInvulnerable) return;
-            if (isDead)
-            {
-                return;
-            }
 
-            currentHealth = currentHealth - damage;
+            base.TakeDamage(damage, playAnimation, damageAnimation = "Take Damage");
 
             healthBar.SetCurrentHealth(currentHealth);
 

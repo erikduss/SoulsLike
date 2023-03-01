@@ -95,6 +95,13 @@ namespace SoulsLike
                     enemyStats.TakeDamage(currentWeaponDamage,true);
                 }
             }
+
+            if(collision.tag == "Illusionary Wall")
+            {
+                IllusionaryWall illusionaryWall = collision.GetComponent<IllusionaryWall>();
+
+                illusionaryWall.wallHasBeenHit = true;
+            }
         }
     }
 }

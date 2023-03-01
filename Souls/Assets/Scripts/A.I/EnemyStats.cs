@@ -33,11 +33,11 @@ namespace SoulsLike
 
         public override void TakeDamage(int damage, bool playAnimation, string damageAnimation = "Take Damage")
         {
+            base.TakeDamage(damage, playAnimation, damageAnimation = "Take Damage");
             if (isDead)
             {
                 return;
             }
-            currentHealth = currentHealth - damage;
             enemyHealthBar.SetHealth(currentHealth);
 
             if(playAnimation) enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
