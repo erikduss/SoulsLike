@@ -87,8 +87,6 @@ namespace SoulsLike
             anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        
-
         public void CanRotate()
         {
             anim.SetBool("canRotate", true);
@@ -143,6 +141,18 @@ namespace SoulsLike
         {
             playerStats.TakeDamage(playerManager.pendingCriticalDamage,false);
             playerManager.pendingCriticalDamage = 0;
+        }
+
+        public void DisableCollision()
+        {
+            playerLocomotion.characterCollider.enabled = false;
+            playerLocomotion.characterCollisionBlockerCollider.enabled = false;
+        }
+
+        public void EnableCollision()
+        {
+            playerLocomotion.characterCollider.enabled = true;
+            playerLocomotion.characterCollisionBlockerCollider.enabled = true;
         }
 
         private void OnAnimatorMove()

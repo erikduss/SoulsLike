@@ -154,6 +154,17 @@ namespace SoulsLike
             playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
         }
 
+        public void PassThroughFogWallInteraction(Transform fogWallEntrance)
+        {
+            playerLocomotion.rigidbody.velocity = Vector3.zero; //Stop the player from sliding
+
+            Vector3 rotationDirection = fogWallEntrance.transform.forward;
+            Quaternion turnRotation = Quaternion.LookRotation(rotationDirection);
+            transform.rotation = turnRotation;
+
+            playerAnimatorManager.PlayTargetAnimation("Pass Through Fog", true);
+        }
+
         #endregion
     }
 }
