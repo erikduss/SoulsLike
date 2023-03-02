@@ -33,6 +33,7 @@ namespace SoulsLike
 
         [Header("A.I Combat Settings")]
         public bool allowAIToPerformCombos;
+        public bool isPhaseShifting;
         public float comboLikelyHood;
 
         private void Awake()
@@ -58,6 +59,8 @@ namespace SoulsLike
 
             isRotatingWithRootMotion = enemyAnimationManager.anim.GetBool("isRotatingWithRootMotion");
             isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
+            isPhaseShifting = enemyAnimationManager.anim.GetBool("isPhaseShifting");
+            isInvulnerable = enemyAnimationManager.anim.GetBool("isInvulnerable");
             canDoCombo = enemyAnimationManager.anim.GetBool("canDoCombo");
             canRotate = enemyAnimationManager.anim.GetBool("canRotate");
             enemyAnimationManager.anim.SetBool("isDead", enemyStats.isDead);

@@ -8,11 +8,13 @@ namespace SoulsLike
     {
         EnemyManager enemyManager;
         EnemyStats enemyStats;
+        EnemyBossManager enemyBossManager;
 
         private void Awake()
         {
             anim = GetComponent<Animator>();
             enemyManager = GetComponentInParent<EnemyManager>();
+            enemyBossManager = GetComponentInParent<EnemyBossManager>();
             enemyStats = GetComponentInParent<EnemyStats>();
         }
 
@@ -87,6 +89,13 @@ namespace SoulsLike
                     soulCountBar.SetSoulCountText(playerStats.soulCount);
                 }
             }
+        }
+
+        public void InstantiateBossParticleFX()
+        {
+            BossFxTransform bossFxTransform = GetComponentInChildren<BossFxTransform>();
+
+            GameObject phaseFX = Instantiate(enemyBossManager.particleFX, bossFxTransform.transform);
         }
 
         private void OnAnimatorMove()

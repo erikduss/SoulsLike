@@ -10,9 +10,9 @@ namespace SoulsLike
         public EnemyAttackAction[] enemyAttacks;
         public PersueTargetState persueTargetState;
 
-        bool randomDestinationSet = false;
-        float verticalMovementValue = 0;
-        float horizontalMovementValue = 0;
+        protected bool randomDestinationSet = false;
+        protected float verticalMovementValue = 0;
+        protected float horizontalMovementValue = 0;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimationManager)
         {
@@ -53,7 +53,7 @@ namespace SoulsLike
             return this;
         }
 
-        private void HandleRotateTowardsTarget(EnemyManager enemyManager)
+        protected void HandleRotateTowardsTarget(EnemyManager enemyManager)
         {
             //rotate manually
             if (enemyManager.isPerformingAction)
@@ -83,14 +83,14 @@ namespace SoulsLike
             }
         }
 
-        private void DecideCirclingAction(EnemyAnimatorManager enemyAnimatorManager)
+        protected void DecideCirclingAction(EnemyAnimatorManager enemyAnimatorManager)
         {
             //Circle with only forward vertical movement
             //circle with running
             WalkAroundTarget(enemyAnimatorManager);
         }
 
-        private void WalkAroundTarget(EnemyAnimatorManager enemyAnimatorManager)
+        protected void WalkAroundTarget(EnemyAnimatorManager enemyAnimatorManager)
         {
             //verticalMovementValue = Random.Range(0, 1); //we only want forward motion (no negative value) so we walk towards target.
             verticalMovementValue = 0.5f;
@@ -116,7 +116,7 @@ namespace SoulsLike
         }
 
         #region Attacks
-        private void GetNewAttack(EnemyManager enemyManager)
+        protected virtual void GetNewAttack(EnemyManager enemyManager)
         {
             Vector3 targetsDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
             float viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);

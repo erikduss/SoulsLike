@@ -6,6 +6,7 @@ namespace SoulsLike
 {
     public class EnemyStats : CharacterStats
     {
+        EnemyManager enemyManager;
         EnemyAnimatorManager enemyAnimatorManager;
         EnemyBossManager enemyBossManager;
         public UIEnemyHealthBar enemyHealthBar;
@@ -15,6 +16,7 @@ namespace SoulsLike
 
         private void Awake()
         {
+            enemyManager = GetComponent<EnemyManager>();
             enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
             enemyBossManager = GetComponent<EnemyBossManager>();
             maxHealth = SetMaxHealthFromHealthLevel();
@@ -38,6 +40,12 @@ namespace SoulsLike
 
         public override void TakeDamage(int damage, bool playAnimation, string damageAnimation = "Take Damage")
         {
+            playAnimation = false;
+
+            if (enemyManager.isPhaseShifting)
+            {
+                playAnimation = false;
+            }
             base.TakeDamage(damage, playAnimation, damageAnimation = "Take Damage");
 
             if (!isBoss)
@@ -46,7 +54,7 @@ namespace SoulsLike
             }
             else if(isBoss && enemyBossManager != null)
             {
-                enemyBossManager.UpdateBossHealthBar(currentHealth);
+                enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
             }
 
             if(playAnimation) enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
