@@ -8,7 +8,7 @@ namespace SoulsLike
     {
         public CombatStanceState combatStanceState;
 
-        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimationManager)
+        public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStats, EnemyAnimatorManager enemyAnimationManager)
         {
             enemyAnimationManager.anim.SetFloat("Vertical", 0);
             enemyAnimationManager.anim.SetFloat("Horizontal", 0);

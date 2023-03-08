@@ -14,7 +14,7 @@ namespace SoulsLike
 
         bool willDoComboOnNextAttack = false;
         public bool hasPerformedAttack = false;
-        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimationManager)
+        public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStats, EnemyAnimatorManager enemyAnimationManager)
         {
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
             RotateTowardsTargetWhilstAttacking(enemyManager);

@@ -8,7 +8,7 @@ namespace SoulsLike
     {
         public CombatStanceState combatStanceState;
         public RotateTowardsTargetState rotateTowardsTargetState;
-        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimationManager)
+        public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStats, EnemyAnimatorManager enemyAnimationManager)
         {
             Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);

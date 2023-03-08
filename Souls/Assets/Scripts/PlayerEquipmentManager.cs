@@ -7,8 +7,8 @@ namespace SoulsLike
     public class PlayerEquipmentManager : MonoBehaviour
     {
         InputHandler inputHandler;
-        PlayerInventory playerInventory;
-        PlayerStats playerStats;
+        PlayerInventoryManager playerInventoryManager;
+        PlayerStatsManager playerStatsmanager;
 
         [Header("Equipment Model Changers")]
         HelmetModelChanger helmetModelChanger;
@@ -29,9 +29,9 @@ namespace SoulsLike
 
         private void Awake()
         {
-            inputHandler = GetComponentInParent<InputHandler>();
-            playerInventory = GetComponentInParent<PlayerInventory>();
-            playerStats = GetComponentInParent<PlayerStats>();
+            inputHandler = GetComponent<InputHandler>();
+            playerInventoryManager = GetComponent<PlayerInventoryManager>();
+            playerStatsmanager = GetComponent<PlayerStatsManager>();
 
             helmetModelChanger = GetComponentInChildren<HelmetModelChanger>();
             torsoModelChanger = GetComponentInChildren<TorsoModelChanger>();
@@ -51,11 +51,11 @@ namespace SoulsLike
             //Helmet Equipment
             helmetModelChanger.UnEquipAllHelmetModels();
 
-            if(playerInventory.currentHelmetEquipment != null)
+            if(playerInventoryManager.currentHelmetEquipment != null)
             {
                 //nakedHeadModel.SetActive(false);
-                helmetModelChanger.EquipHelmetModelByName(playerInventory.currentHelmetEquipment.helmetModelName);
-                playerStats.physicalDamageAbsorptionHead = playerInventory.currentHelmetEquipment.physicalDefense;
+                helmetModelChanger.EquipHelmetModelByName(playerInventoryManager.currentHelmetEquipment.helmetModelName);
+                playerStatsmanager.physicalDamageAbsorptionHead = playerInventoryManager.currentHelmetEquipment.physicalDefense;
             }
             else
             {
@@ -64,21 +64,21 @@ namespace SoulsLike
 
                 //Player's head model (can be active when there's an exposed helmet, for example a hood)
                 //nakedHeadModel.SetActive(true);
-                playerStats.physicalDamageAbsorptionHead = 0;
+                playerStatsmanager.physicalDamageAbsorptionHead = 0;
             }
             
             //Torso Equipment
             torsoModelChanger.UnEquipAllTorsoModels();
 
-            if(playerInventory.currentTorsoEquipment != null)
+            if(playerInventoryManager.currentTorsoEquipment != null)
             {
-                torsoModelChanger.EquipTorsoModelByName(playerInventory.currentTorsoEquipment.torsoModelName);
-                playerStats.physicalDamageAbsorptionBody = playerInventory.currentTorsoEquipment.physicalDefense;
+                torsoModelChanger.EquipTorsoModelByName(playerInventoryManager.currentTorsoEquipment.torsoModelName);
+                playerStatsmanager.physicalDamageAbsorptionBody = playerInventoryManager.currentTorsoEquipment.physicalDefense;
             }
             else
             {
                 //Equip Default Torso (naked)
-                playerStats.physicalDamageAbsorptionBody = 0;
+                playerStatsmanager.physicalDamageAbsorptionBody = 0;
             }
 
             //Leg Equipment
@@ -86,17 +86,17 @@ namespace SoulsLike
             //leftLegModelChanger.UnEquipAllLeftLegModels();
             //rightLegModelChanger.UnEquipAllRightLegModels();
 
-            if(playerInventory.currentLegEquipment != null)
+            if(playerInventoryManager.currentLegEquipment != null)
             {
-                hipModelChanger.EquipHipModelByName(playerInventory.currentLegEquipment.hipModelName);
+                hipModelChanger.EquipHipModelByName(playerInventoryManager.currentLegEquipment.hipModelName);
                 //leftLegModelChanger.EquipLeftLegModelByName(playerInventory.currentLegEquipment.leftLegName);
                 //rightLegModelChanger.EquipRightLegModelByName(playerInventory.currentLegEquipment.rightLegName);
-                playerStats.physicalDamageAbsorptionLegs = playerInventory.currentLegEquipment.physicalDefense;
+                playerStatsmanager.physicalDamageAbsorptionLegs = playerInventoryManager.currentLegEquipment.physicalDefense;
             }
             else
             {
                 //Equip Default (naked)
-                playerStats.physicalDamageAbsorptionLegs = 0;
+                playerStatsmanager.physicalDamageAbsorptionLegs = 0;
             }
             
         }
@@ -105,11 +105,11 @@ namespace SoulsLike
         {
             if (inputHandler.twoHandFlag)
             {
-                blockingCollider.SetColliderDamageAbsorption(playerInventory.rightWeapon);
+                blockingCollider.SetColliderDamageAbsorption(playerInventoryManager.rightWeapon);
             }
             else
             {
-                blockingCollider.SetColliderDamageAbsorption(playerInventory.leftWeapon);
+                blockingCollider.SetColliderDamageAbsorption(playerInventoryManager.leftWeapon);
             }
             
             blockingCollider.EnableBlockingCollider();

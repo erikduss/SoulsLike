@@ -4,100 +4,100 @@ using UnityEngine;
 
 namespace SoulsLike
 {
-    public class PlayerAttacker : MonoBehaviour
+    public class PlayerCombatManager : MonoBehaviour
     {
         CameraHandler cameraHandler;
-        PlayerAnimatorManager animatorHandler;
+        PlayerAnimatorManager playerAnimatorManager;
         PlayerEquipmentManager playerEquipmentManager;
         PlayerManager playerManager;
-        PlayerStats playerStats;
-        PlayerInventory playerInventory;
+        PlayerStatsManager playerStatsManager;
+        PlayerInventoryManager playerInventoryManager;
         InputHandler inputHandler;
-        WeaponSlotManager weaponSlotManager;
+        PlayerWeaponSlotManager playerWeaponSlotManager;
         public string lastAttack;
 
         LayerMask backStabLayer = 1 << 14;
         LayerMask riposteLayer = 1 << 15;
         private void Awake()
         {
-            animatorHandler = GetComponent<PlayerAnimatorManager>();
+            playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
-            playerManager = GetComponentInParent<PlayerManager>();
-            playerStats = GetComponentInParent<PlayerStats>();
-            playerInventory = GetComponentInParent<PlayerInventory>();
-            weaponSlotManager = GetComponent<WeaponSlotManager>();
-            inputHandler = GetComponentInParent<InputHandler>();
+            playerManager = GetComponent<PlayerManager>();
+            playerStatsManager = GetComponent<PlayerStatsManager>();
+            playerInventoryManager = GetComponent<PlayerInventoryManager>();
+            playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
+            inputHandler = GetComponent<InputHandler>();
         }
 
         public void HandleWeaponCombo(WeaponItem weapon)
         {
-            if (playerStats.currentStamina <= 0)
+            if (playerStatsManager.currentStamina <= 0)
             {
                 return;
             }
 
             if (inputHandler.comboFlag)
             {
-                animatorHandler.anim.SetBool("canDoCombo", false);
+                playerAnimatorManager.anim.SetBool("canDoCombo", false);
 
                 if (lastAttack == weapon.OH_Light_Attack_01)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_02, true);
+                    playerAnimatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_02, true);
                 }
                 else if(lastAttack == weapon.th_light_attack_01)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.th_light_attack_02, true);
+                    playerAnimatorManager.PlayTargetAnimation(weapon.th_light_attack_02, true);
                 }
                 else if(lastAttack == weapon.OH_Heavy_Attack_01)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_02, true);
+                    playerAnimatorManager.PlayTargetAnimation(weapon.OH_Heavy_Attack_02, true);
                 }
                 else if(lastAttack == weapon.th_Heavy_attack_01)
                 {
-                    animatorHandler.PlayTargetAnimation(weapon.th_Heavy_attack_02, true);
+                    playerAnimatorManager.PlayTargetAnimation(weapon.th_Heavy_attack_02, true);
                 }
             }
         }
 
         public void HandleLightAttack(WeaponItem weapon)
         {
-            if (playerStats.currentStamina <= 0)
+            if (playerStatsManager.currentStamina <= 0)
             {
                 return;
             }
 
-            weaponSlotManager.attackingWeapon = weapon;
+            playerWeaponSlotManager.attackingWeapon = weapon;
 
             if (inputHandler.twoHandFlag)
             {
-                animatorHandler.PlayTargetAnimation(weapon.th_light_attack_01, true);
+                playerAnimatorManager.PlayTargetAnimation(weapon.th_light_attack_01, true);
                 lastAttack = weapon.th_light_attack_01;
             }
             else
             {
-                animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_01, true);
+                playerAnimatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_01, true);
                 lastAttack = weapon.OH_Light_Attack_01;
             }
         }
 
         public void HandleHeavyAttack(WeaponItem weapon)
         {
-            if (playerStats.currentStamina <= 0)
+            if (playerStatsManager.currentStamina <= 0)
             {
                 return;
             }
 
-            weaponSlotManager.attackingWeapon = weapon;
+            playerWeaponSlotManager.attackingWeapon = weapon;
 
             if (inputHandler.twoHandFlag)
             {
-                animatorHandler.PlayTargetAnimation(weapon.th_Heavy_attack_01, true);
+                playerAnimatorManager.PlayTargetAnimation(weapon.th_Heavy_attack_01, true);
                 lastAttack = weapon.th_Heavy_attack_01;
             }
             else
             {
-                animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_01, true);
+                playerAnimatorManager.PlayTargetAnimation(weapon.OH_Heavy_Attack_01, true);
                 lastAttack = weapon.OH_Heavy_Attack_01;
             }
         }
@@ -105,25 +105,25 @@ namespace SoulsLike
         #region Input Actions
         public void HandleRBAction()
         {
-            if (playerInventory.rightWeapon.isMeleeWeapon)
+            if (playerInventoryManager.rightWeapon.isMeleeWeapon)
             {
                 PerformRBMeleeAction();
             }
-            else if (playerInventory.rightWeapon.isSpellCaster || playerInventory.rightWeapon.isFaithCaster || playerInventory.rightWeapon.isPyroCaster)
+            else if (playerInventoryManager.rightWeapon.isSpellCaster || playerInventoryManager.rightWeapon.isFaithCaster || playerInventoryManager.rightWeapon.isPyroCaster)
             {
-                PerformRBMagicAction(playerInventory.rightWeapon);
+                PerformRBMagicAction(playerInventoryManager.rightWeapon);
             }
         }
 
         public void HandleRTAction()
         {
-            if (playerInventory.rightWeapon.isMeleeWeapon)
+            if (playerInventoryManager.rightWeapon.isMeleeWeapon)
             {
                 PerformRTMeleeAction();
             }
-            else if (playerInventory.rightWeapon.isSpellCaster || playerInventory.rightWeapon.isFaithCaster || playerInventory.rightWeapon.isPyroCaster)
+            else if (playerInventoryManager.rightWeapon.isSpellCaster || playerInventoryManager.rightWeapon.isFaithCaster || playerInventoryManager.rightWeapon.isPyroCaster)
             {
-                PerformRBMagicAction(playerInventory.rightWeapon);
+                PerformRBMagicAction(playerInventoryManager.rightWeapon);
             }
         }
 
@@ -134,12 +134,12 @@ namespace SoulsLike
 
         public void HandleLTAction()
         {
-            if (playerInventory.leftWeapon.isShieldWeapon)
+            if (playerInventoryManager.leftWeapon.isShieldWeapon)
             {
                 PerformLTWeaponArt(inputHandler.twoHandFlag);
                 //perform shield weapon art
             }
-            else if (playerInventory.leftWeapon.isMeleeWeapon)
+            else if (playerInventoryManager.leftWeapon.isMeleeWeapon)
             {
                 //do light attack
             }
@@ -152,7 +152,7 @@ namespace SoulsLike
             if (playerManager.canDoCombo)
             {
                 inputHandler.comboFlag = true;
-                HandleWeaponCombo(playerInventory.rightWeapon);
+                HandleWeaponCombo(playerInventoryManager.rightWeapon);
                 inputHandler.comboFlag = false;
             }
             else
@@ -165,8 +165,8 @@ namespace SoulsLike
                 {
                     return;
                 }
-                animatorHandler.anim.SetBool("isUsingRightHand", true);
-                HandleLightAttack(playerInventory.rightWeapon);
+                playerAnimatorManager.anim.SetBool("isUsingRightHand", true);
+                HandleLightAttack(playerInventoryManager.rightWeapon);
             }
         }
 
@@ -175,7 +175,7 @@ namespace SoulsLike
             if (playerManager.canDoCombo)
             {
                 inputHandler.comboFlag = true;
-                HandleWeaponCombo(playerInventory.rightWeapon);
+                HandleWeaponCombo(playerInventoryManager.rightWeapon);
                 inputHandler.comboFlag = false;
             }
             else
@@ -188,8 +188,8 @@ namespace SoulsLike
                 {
                     return;
                 }
-                animatorHandler.anim.SetBool("isUsingRightHand", true);
-                HandleHeavyAttack(playerInventory.rightWeapon);
+                playerAnimatorManager.anim.SetBool("isUsingRightHand", true);
+                HandleHeavyAttack(playerInventoryManager.rightWeapon);
             }
         }
 
@@ -202,11 +202,11 @@ namespace SoulsLike
 
             if (weapon.isFaithCaster)
             {
-                if(playerInventory.currentSpell != null && playerInventory.currentSpell.isFaithSpell)
+                if(playerInventoryManager.currentSpell != null && playerInventoryManager.currentSpell.isFaithSpell)
                 {
-                    if(playerStats.currentFocusPoints >= playerInventory.currentSpell.focusPointCost)
+                    if(playerStatsManager.currentFocusPoints >= playerInventoryManager.currentSpell.focusPointCost)
                     {
-                        playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStats, weaponSlotManager);
+                        playerInventoryManager.currentSpell.AttemptToCastSpell(playerAnimatorManager, playerStatsManager, playerWeaponSlotManager);
                     }
                     else
                     {
@@ -216,11 +216,11 @@ namespace SoulsLike
             }
             else if (weapon.isPyroCaster)
             {
-                if (playerInventory.currentSpell != null && playerInventory.currentSpell.isPyroSpell)
+                if (playerInventoryManager.currentSpell != null && playerInventoryManager.currentSpell.isPyroSpell)
                 {
-                    if (playerStats.currentFocusPoints >= playerInventory.currentSpell.focusPointCost)
+                    if (playerStatsManager.currentFocusPoints >= playerInventoryManager.currentSpell.focusPointCost)
                     {
-                        playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStats, weaponSlotManager);
+                        playerInventoryManager.currentSpell.AttemptToCastSpell(playerAnimatorManager, playerStatsManager, playerWeaponSlotManager);
                     }
                     else
                     {
@@ -240,14 +240,14 @@ namespace SoulsLike
             }
             else
             {
-                animatorHandler.PlayTargetAnimation(playerInventory.leftWeapon.weapon_Art, true);
+                playerAnimatorManager.PlayTargetAnimation(playerInventoryManager.leftWeapon.weapon_Art, true);
             }
         }
 
         private void SuccessfullyCastSpell()
         {
-            playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats, cameraHandler, weaponSlotManager);
-            animatorHandler.anim.SetBool("isFiringSpell", true);
+            playerInventoryManager.currentSpell.SuccessfullyCastSpell(playerAnimatorManager, playerStatsManager, cameraHandler, playerWeaponSlotManager);
+            playerAnimatorManager.anim.SetBool("isFiringSpell", true);
         }
         #endregion
 
@@ -261,7 +261,7 @@ namespace SoulsLike
 
             if (playerManager.isBlocking) return;
 
-            animatorHandler.PlayTargetAnimation("Block_Start", false, true);
+            playerAnimatorManager.PlayTargetAnimation("Block_Start", false, true);
             playerEquipmentManager.OpenBlockingCollider();
             playerManager.isBlocking = true;
         }
@@ -269,7 +269,7 @@ namespace SoulsLike
 
         public void AttemptBackStabOrRiposte()
         {
-            if (playerStats.currentStamina <= 0)
+            if (playerStatsManager.currentStamina <= 0)
             {
                 return;
             }
@@ -280,7 +280,7 @@ namespace SoulsLike
             {
                 //Check for team ID
                 CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
-                DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
+                DamageCollider rightWeapon = playerWeaponSlotManager.rightHandDamageCollider;
 
                 if(enemyCharacterManager != null)
                 {
@@ -293,10 +293,10 @@ namespace SoulsLike
                     Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                     playerManager.transform.rotation = targetRotation;
 
-                    int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
+                    int criticalDamage = playerInventoryManager.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
                     enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
-                    animatorHandler.PlayTargetAnimation("Back Stab", true);
+                    playerAnimatorManager.PlayTargetAnimation("Back Stab", true);
                     enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimationWithRootRotation("Back Stabbed", true);
                 }
             }
@@ -304,7 +304,7 @@ namespace SoulsLike
             {
                 //Check for team ID
                 CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
-                DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
+                DamageCollider rightWeapon = playerWeaponSlotManager.rightHandDamageCollider;
 
                 if(enemyCharacterManager != null && enemyCharacterManager.canBeRiposted)
                 {
@@ -318,10 +318,10 @@ namespace SoulsLike
                     Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
                     playerManager.transform.rotation = targetRotation;
 
-                    int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
+                    int criticalDamage = playerInventoryManager.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
                     enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
-                    animatorHandler.PlayTargetAnimation("Riposte", true);
+                    playerAnimatorManager.PlayTargetAnimation("Riposte", true);
                     enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Riposte_Stabbed", true);
                 }
             }

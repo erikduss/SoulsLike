@@ -44,13 +44,13 @@ namespace SoulsLike
         public Transform criticalAttackRayCastStartPoint;
 
         PlayerControls inputActions;
-        PlayerAttacker playerAttacker;
-        PlayerInventory playerInventory;
+        PlayerCombatManager playerCombatManager;
+        PlayerInventoryManager playerInventoryManager;
         PlayerManager playerManager;
         PlayerEffectsManager playerEffectsManager;
-        PlayerStats playerStats;
+        PlayerStatsManager playerStatsManager;
         BlockingCollider blockingCollider;
-        WeaponSlotManager weaponSlotManager;
+        PlayerWeaponSlotManager weaponSlotManager;
         CameraHandler cameraHandler;
         PlayerAnimatorManager animatorHandler;
         UIManager uiManager;
@@ -60,16 +60,16 @@ namespace SoulsLike
 
         private void Awake()
         {
-            playerAttacker = GetComponentInChildren<PlayerAttacker>();
-            playerInventory = GetComponent<PlayerInventory>();
+            playerCombatManager = GetComponent<PlayerCombatManager>();
+            playerInventoryManager = GetComponent<PlayerInventoryManager>();
             playerManager = GetComponent<PlayerManager>();
-            playerStats = GetComponent<PlayerStats>();
-            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            playerStatsManager = GetComponent<PlayerStatsManager>();
+            weaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
             blockingCollider = GetComponentInChildren<BlockingCollider>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             uiManager = FindObjectOfType<UIManager>();
-            animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
-            playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
+            animatorHandler = GetComponent<PlayerAnimatorManager>();
+            playerEffectsManager = GetComponent<PlayerEffectsManager>();
         }
 
         public void OnEnable()
@@ -138,13 +138,13 @@ namespace SoulsLike
             {
                 rollInputTimer += delta;
 
-                if(playerStats.currentStamina <= 0)
+                if(playerStatsManager.currentStamina <= 0)
                 {
                     b_Input = false;
                     sprintFlag = false;
                 }
 
-                if(moveAmount > 0.5f && playerStats.currentStamina > 0)
+                if(moveAmount > 0.5f && playerStatsManager.currentStamina > 0)
                 {
                     sprintFlag = true;
                 }
@@ -167,17 +167,17 @@ namespace SoulsLike
             //RB Input handles the RIGHT hand weapon's light attack
             if (rb_Input)
             {
-                playerAttacker.HandleRBAction();
+                playerCombatManager.HandleRBAction();
             }
 
             if (rt_Input)
             {
-                playerAttacker.HandleRTAction();
+                playerCombatManager.HandleRTAction();
             }
 
             if (lb_Input)
             {
-                playerAttacker.HandleLBAction();
+                playerCombatManager.HandleLBAction();
             }
             else
             {
@@ -197,7 +197,7 @@ namespace SoulsLike
                 }
                 else
                 {
-                    playerAttacker.HandleLTAction();
+                    playerCombatManager.HandleLTAction();
                 }
                 
                 //Else handle light attack if melee weapon
@@ -209,11 +209,11 @@ namespace SoulsLike
         {
             if (d_Pad_Right)
             {
-                playerInventory.ChangeRightWeapon();
+                playerInventoryManager.ChangeRightWeapon();
             }
             else if (d_Pad_Left)
             {
-                playerInventory.ChangeLeftWeapon();
+                playerInventoryManager.ChangeLeftWeapon();
             }
 
         }
@@ -287,13 +287,13 @@ namespace SoulsLike
 
                 if (twoHandFlag)
                 {
-                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+                    weaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
                     //enable two handing
                 }
                 else
                 {
-                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
-                    weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+                    weaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
+                    weaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.leftWeapon, true);
                     //disable two handing
                 }
             }
@@ -303,7 +303,7 @@ namespace SoulsLike
             if (critical_Attack_Input)
             {
                 critical_Attack_Input = false;
-                playerAttacker.AttemptBackStabOrRiposte();
+                playerCombatManager.AttemptBackStabOrRiposte();
             }
         }
     
@@ -312,7 +312,7 @@ namespace SoulsLike
             if (x_Input)
             {
                 x_Input = false;
-                playerInventory.currentConsumable.AttemptToConsumeItem(animatorHandler, weaponSlotManager, playerEffectsManager);
+                playerInventoryManager.currentConsumable.AttemptToConsumeItem(animatorHandler, weaponSlotManager, playerEffectsManager);
             }
         }
     }

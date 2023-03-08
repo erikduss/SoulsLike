@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace SoulsLike
 {
-    public class PlayerStats : CharacterStats
+    public class PlayerStatsManager : CharacterStatsManager
     {
         PlayerManager playerManager;
         HealthBar healthBar;
         StaminaBar staminaBar;
         FocusPointBar focusPointBar;
 
-        PlayerAnimatorManager animatorHandler;
+        PlayerAnimatorManager playerAnimatorManager;
 
         public float staminaRegenerationAmount = 1f;
         private float staminaRegenerationTimer = 0;
@@ -22,7 +22,7 @@ namespace SoulsLike
             healthBar = FindObjectOfType<HealthBar>();
             staminaBar = FindObjectOfType<StaminaBar>();
             focusPointBar = FindObjectOfType<FocusPointBar>();
-            animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
+            playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         }
 
         void Start()
@@ -83,12 +83,12 @@ namespace SoulsLike
 
             healthBar.SetCurrentHealth(currentHealth);
 
-            if (playAnimation) animatorHandler.PlayTargetAnimation(damageAnimation, true);
+            if (playAnimation) playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
             if(currentHealth <= 0)
             {
                 currentHealth = 0;
-                if (playAnimation) animatorHandler.PlayTargetAnimation("Death", true);
+                if (playAnimation) playerAnimatorManager.PlayTargetAnimation("Death", true);
                 isDead = true;
                 //HANDLE PLAYER DEATH
             }

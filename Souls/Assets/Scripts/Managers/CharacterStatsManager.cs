@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SoulsLike
 {
-    public class CharacterStats : MonoBehaviour
+    public class CharacterStatsManager : MonoBehaviour
     {
         public int healthLevel = 10;
         public int maxHealth;
@@ -19,6 +19,7 @@ namespace SoulsLike
         public float currentFocusPoints;
 
         public int soulCount = 0;
+        public int soulsAwardedOnDeath = 50;
 
         [Header("Poise")]
         public float totalPoiseDefense; //Total poise after damage calculation

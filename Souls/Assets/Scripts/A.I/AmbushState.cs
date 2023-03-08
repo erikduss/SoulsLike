@@ -14,7 +14,7 @@ namespace SoulsLike
 
         public PersueTargetState persueTargetState;
 
-        public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimationManager)
+        public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStats, EnemyAnimatorManager enemyAnimationManager)
         {
             if(isSleeping && enemyManager.isInteracting == false)
             {
@@ -27,7 +27,7 @@ namespace SoulsLike
 
             for(int i = 0; i< colliders.Length; i++)
             {
-                CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
+                CharacterStatsManager characterStats = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
                 if(characterStats != null)
                 {

@@ -4,22 +4,16 @@ using UnityEngine;
 
 namespace SoulsLike
 {
-    public class EnemyWeaponSlotManager : MonoBehaviour
+    public class EnemyWeaponSlotManager : CharacterWeaponSlotManager
     {
         public WeaponItem rightHandWeapon;
         public WeaponItem leftHandWeapon;
 
-        WeaponHolderSlot rightHandSlot;
-        WeaponHolderSlot leftHandSlot;
-
-        DamageCollider leftHandDamageCollider;
-        DamageCollider rightHandDamageCollider;
-
-        EnemyStats enemyStats;
+        EnemyStatsManager enemyStatsManager;
 
         private void Awake()
         {
-            enemyStats = GetComponentInParent<EnemyStats>();
+            enemyStatsManager = GetComponent<EnemyStatsManager>();
             LoadWeaponHolderSlots();
         }
 
@@ -122,12 +116,12 @@ namespace SoulsLike
 
         public void GrantWeaponAttackingPoiseBonus()
         {
-            enemyStats.totalPoiseDefense = enemyStats.totalPoiseDefense + enemyStats.offensivePoiseBonus;
+            enemyStatsManager.totalPoiseDefense = enemyStatsManager.totalPoiseDefense + enemyStatsManager.offensivePoiseBonus;
         }
 
         public void ResetWeaponAttackingPoiseBonus()
         {
-            enemyStats.totalPoiseDefense = enemyStats.armorPoiseBonus;
+            enemyStatsManager.totalPoiseDefense = enemyStatsManager.armorPoiseBonus;
         }
 
         #endregion

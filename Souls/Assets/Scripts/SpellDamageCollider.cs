@@ -12,7 +12,7 @@ namespace SoulsLike
 
         bool hasCollided = false;
 
-        CharacterStats spellTarget;
+        CharacterStatsManager spellTarget;
         Rigidbody rigidbody;
 
         Vector3 impactNormal; //used to rotate the impact particles.
@@ -38,7 +38,7 @@ namespace SoulsLike
         {
             if (!hasCollided)
             {
-                spellTarget = collision.transform.GetComponent<CharacterStats>();
+                spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
 
                 if (spellTarget != null)
                 {

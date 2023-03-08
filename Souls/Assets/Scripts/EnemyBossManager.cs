@@ -9,7 +9,7 @@ namespace SoulsLike
         public string bossName;
 
         UIBossHealthBar bossHealthBar;
-        EnemyStats enemyStats;
+        EnemyStatsManager enemyStats;
         EnemyAnimatorManager enemyAnimatorManager;
         BossCombatStanceState bossCombatStanceState;
 
@@ -22,7 +22,7 @@ namespace SoulsLike
         private void Awake()
         {
             bossHealthBar = FindObjectOfType<UIBossHealthBar>();
-            enemyStats = GetComponent<EnemyStats>();
+            enemyStats = GetComponent<EnemyStatsManager>();
             enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
             bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
         }

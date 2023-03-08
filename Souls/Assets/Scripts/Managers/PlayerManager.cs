@@ -9,34 +9,24 @@ namespace SoulsLike
         InputHandler inputHandler;
         Animator anim;
         CameraHandler cameraHandler;
-        PlayerLocomotion playerLocomotion;
+        PlayerLocomotionManager playerLocomotion;
         PlayerAnimatorManager playerAnimatorManager;
-        PlayerStats playerStats;
+        PlayerStatsManager playerStatsManager;
 
         InteractableUI interactableUI;
         public GameObject interactableUIGameObject;
         public GameObject itemInteractableGameObject;
-
-        public bool isInteracting;
-
-        [Header("Player Flags")]
-        public bool isSprinting;
-        public bool isInAir;
-        public bool isGrounded;
-        public bool canDoCombo;
-        public bool isUsingRightHand;
-        public bool isUsingLeftHand;
 
         private void Awake()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
             backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
             inputHandler = GetComponent<InputHandler>();
-            playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
-            anim = GetComponentInChildren<Animator>();
-            playerLocomotion = GetComponent<PlayerLocomotion>();
+            playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+            anim = GetComponent<Animator>();
+            playerLocomotion = GetComponent<PlayerLocomotionManager>();
             interactableUI = FindObjectOfType<InteractableUI>();
-            playerStats = GetComponent<PlayerStats>();
+            playerStatsManager = GetComponent<PlayerStatsManager>();
         }
 
         // Start is called before the first frame update
@@ -59,13 +49,13 @@ namespace SoulsLike
 
             anim.SetBool("isBlocking", isBlocking);
             anim.SetBool("isInAir", isInAir);
-            anim.SetBool("isDead", playerStats.isDead);
+            anim.SetBool("isDead", playerStatsManager.isDead);
 
             inputHandler.TickInput(delta);
             playerAnimatorManager.canRotate = anim.GetBool("canRotate");
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleJumping();
-            playerStats.RegenerateStamina();
+            playerStatsManager.RegenerateStamina();
 
             CheckForInteractableObject();
         }

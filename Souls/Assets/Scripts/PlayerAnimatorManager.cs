@@ -6,21 +6,17 @@ namespace SoulsLike
 {
     public class PlayerAnimatorManager : AnimatorManager
     {
-        PlayerManager playerManager;
-        PlayerStats playerStats;
-        
         private InputHandler inputHandler;
-        private PlayerLocomotion playerLocomotion;
+        private PlayerLocomotionManager playerLocomotionManager;
         int vertical;
         int horizontal;
 
-        public void Initialize()
+        protected override void Awake()
         {
-            playerManager = GetComponentInParent<PlayerManager>();
-            playerStats = GetComponentInParent<PlayerStats>();
+            base.Awake();
             anim = GetComponent<Animator>();
             inputHandler = GetComponentInParent<InputHandler>();
-            playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+            playerLocomotionManager = GetComponentInParent<PlayerLocomotionManager>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
         }
@@ -87,87 +83,31 @@ namespace SoulsLike
             anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        public void CanRotate()
-        {
-            anim.SetBool("canRotate", true);
-        }
-
-        public void StopRotation()
-        {
-            anim.SetBool("canRotate", false);
-        }
-
-        public void EnableCombo()
-        {
-            anim.SetBool("canDoCombo", true);
-        }
-
-        public void DisableCombo()
-        {
-            anim.SetBool("canDoCombo", false);
-        }
-
-        public void EnableIsInvulnerable()
-        {
-            anim.SetBool("isInvulnerable", true);
-        }
-
-        public void DisableIsInvulnerable()
-        {
-            anim.SetBool("isInvulnerable", false);
-        }
-
-        public void EnableIsParrying()
-        {
-            playerManager.isParrying = true;
-        }
-
-        public void DisableIsParrying()
-        {
-            playerManager.isParrying = false;
-        }
-
-        public void EnableCanbeRiposted()
-        {
-            playerManager.canBeRiposted = true;
-        }
-
-        public void DisableCanbeRiposted()
-        {
-            playerManager.canBeRiposted = false;
-        }
-
-        public override void TakeCriticalDamageAnimationEvent()
-        {
-            playerStats.TakeDamage(playerManager.pendingCriticalDamage,false);
-            playerManager.pendingCriticalDamage = 0;
-        }
-
         public void DisableCollision()
         {
-            playerLocomotion.characterCollider.enabled = false;
-            playerLocomotion.characterCollisionBlockerCollider.enabled = false;
+            playerLocomotionManager.characterCollider.enabled = false;
+            playerLocomotionManager.characterCollisionBlockerCollider.enabled = false;
         }
 
         public void EnableCollision()
         {
-            playerLocomotion.characterCollider.enabled = true;
-            playerLocomotion.characterCollisionBlockerCollider.enabled = true;
+            playerLocomotionManager.characterCollider.enabled = true;
+            playerLocomotionManager.characterCollisionBlockerCollider.enabled = true;
         }
 
         private void OnAnimatorMove()
         {
-            if(playerManager.isInteracting == false)
+            if(characterManager.isInteracting == false)
             {
                 return;
             }
 
             float delta = Time.deltaTime;
-            playerLocomotion.rigidbody.drag = 0;
+            playerLocomotionManager.rigidbody.drag = 0;
             Vector3 deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
             Vector3 velocity = deltaPosition / delta;
-            playerLocomotion.rigidbody.velocity = velocity;
+            playerLocomotionManager.rigidbody.velocity = velocity;
         }
     }
 }

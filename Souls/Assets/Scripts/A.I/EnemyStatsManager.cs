@@ -4,20 +4,19 @@ using UnityEngine;
 
 namespace SoulsLike
 {
-    public class EnemyStats : CharacterStats
+    public class EnemyStatsManager : CharacterStatsManager
     {
         EnemyManager enemyManager;
         EnemyAnimatorManager enemyAnimatorManager;
         EnemyBossManager enemyBossManager;
         public UIEnemyHealthBar enemyHealthBar;
-        public int soulsAwardedOnDeath = 50;
 
         public bool isBoss;
 
         private void Awake()
         {
             enemyManager = GetComponent<EnemyManager>();
-            enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+            enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
             enemyBossManager = GetComponent<EnemyBossManager>();
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace SoulsLike
 {
-    public class PlayerLocomotion : MonoBehaviour
+    public class PlayerLocomotionManager : MonoBehaviour
     {
         CameraHandler cameraHandler;
         PlayerManager playerManager;
-        PlayerStats playerStats;
+        PlayerStatsManager playerStatsManager;
         Transform cameraObject;
         InputHandler inputHandler;
         public Vector3 moveDirection;
@@ -16,7 +16,7 @@ namespace SoulsLike
         [HideInInspector]
         public Transform myTransform;
         [HideInInspector]
-        public PlayerAnimatorManager animatorHandler;
+        public PlayerAnimatorManager playerAnimatorManager;
 
         public new Rigidbody rigidbody;
         public GameObject normalCamera;
@@ -56,17 +56,16 @@ namespace SoulsLike
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
             playerManager = GetComponent<PlayerManager>();
-            playerStats = GetComponent<PlayerStats>();
+            playerStatsManager = GetComponent<PlayerStatsManager>();
             rigidbody = GetComponent<Rigidbody>();
             inputHandler = GetComponent<InputHandler>();
-            animatorHandler = GetComponentInChildren<PlayerAnimatorManager>();
+            playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         }
 
         void Start()
         {
             cameraObject = Camera.main.transform;
             myTransform = transform;
-            animatorHandler.Initialize();
 
             playerManager.isGrounded = true;
             ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
@@ -80,7 +79,7 @@ namespace SoulsLike
 
         public void HandleRotation(float delta)
         {
-            if (animatorHandler.canRotate)
+            if (playerAnimatorManager.canRotate)
             {
                 if (inputHandler.lockOnFlag)
                 {
@@ -164,7 +163,7 @@ namespace SoulsLike
                 speed = sprintSpeed;
                 playerManager.isSprinting = true;
                 moveDirection *= speed;
-                playerStats.TakeStaminaDamage(sprintStaminaCost);
+                playerStatsManager.TakeStaminaDamage(sprintStaminaCost);
             }
             else
             {
@@ -185,22 +184,22 @@ namespace SoulsLike
 
             if (inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
             {
-                animatorHandler.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
+                playerAnimatorManager.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
             }
             else
             {
-                animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+                playerAnimatorManager.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
             }
         }
 
         public void HandleRollingAndSprinting(float delta)
         {
-            if (animatorHandler.anim.GetBool("isInteracting"))
+            if (playerAnimatorManager.anim.GetBool("isInteracting"))
             {
                 return;
             }
 
-            if(playerStats.currentStamina <= 0)
+            if(playerStatsManager.currentStamina <= 0)
             {
                 return;
             }
@@ -212,16 +211,16 @@ namespace SoulsLike
 
                 if(inputHandler.moveAmount > 0)
                 {
-                    animatorHandler.PlayTargetAnimation("Rolling", true);
+                    playerAnimatorManager.PlayTargetAnimation("Rolling", true);
                     moveDirection.y = 0;
                     Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = rollRotation;
-                    playerStats.TakeStaminaDamage(rollStaminaCost);
+                    playerStatsManager.TakeStaminaDamage(rollStaminaCost);
                 }
                 else
                 {
-                    animatorHandler.PlayTargetAnimation("Backstep", true);
-                    playerStats.TakeStaminaDamage(backStepStaminaCost);
+                    playerAnimatorManager.PlayTargetAnimation("Backstep", true);
+                    playerStatsManager.TakeStaminaDamage(backStepStaminaCost);
                 }
             }
         }
@@ -263,12 +262,12 @@ namespace SoulsLike
                     if(inAirTimer > 0.5f)
                     {
                         Debug.Log("You were in the air for " + inAirTimer);
-                        animatorHandler.PlayTargetAnimation("Land", true);
+                        playerAnimatorManager.PlayTargetAnimation("Land", true);
                         inAirTimer = 0;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Empty", false);
+                        playerAnimatorManager.PlayTargetAnimation("Empty", false);
                         inAirTimer = 0;
                     }
 
@@ -286,7 +285,7 @@ namespace SoulsLike
                 {
                     if(playerManager.isInteracting == false)
                     {
-                        animatorHandler.PlayTargetAnimation("Falling", true);
+                        playerAnimatorManager.PlayTargetAnimation("Falling", true);
                     }
 
                     Vector3 vel = rigidbody.velocity;
@@ -326,7 +325,7 @@ namespace SoulsLike
                 return;
             }
 
-            if (playerStats.currentStamina <= 0)
+            if (playerStatsManager.currentStamina <= 0)
             {
                 return;
             }
@@ -337,7 +336,7 @@ namespace SoulsLike
                 {
                     moveDirection = cameraObject.forward * inputHandler.vertical;
                     moveDirection += cameraObject.right * inputHandler.horizontal;
-                    animatorHandler.PlayTargetAnimation("Jump", true);
+                    playerAnimatorManager.PlayTargetAnimation("Jump", true);
                     moveDirection.y = 0;
                     Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = jumpRotation;
