@@ -14,6 +14,10 @@ namespace SoulsLike
         public int baseDamage = 25;
         public int criticalDamageMultiplier = 4;
 
+        [Header("Poise")]
+        public float poiseBreak;
+        public float offensivePoiseBonus;
+
         [Header("Absorption")]
         public float physicalDamageAbsorption;
 
@@ -29,6 +33,8 @@ namespace SoulsLike
         public string OH_Heavy_Attack_02;
         public string th_light_attack_01;
         public string th_light_attack_02;
+        public string th_Heavy_attack_01;
+        public string th_Heavy_attack_02;
 
         [Header("Weapon Art")]
         public string weapon_Art;

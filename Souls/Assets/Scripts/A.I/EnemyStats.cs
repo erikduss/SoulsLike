@@ -31,6 +31,18 @@ namespace SoulsLike
             }
         }
 
+        public override void HandlePoiseResetTimer()
+        {
+            if (poiseResetTimer > 0)
+            {
+                poiseResetTimer = poiseResetTimer - Time.deltaTime;
+            }
+            else if(poiseResetTimer <= 0 && !enemyManager.isInteracting)
+            {
+                totalPoiseDefense = armorPoiseBonus;
+            }
+        }
+
         private int SetMaxHealthFromHealthLevel()
         {
             //skill level increase etc things that boost health
@@ -38,10 +50,13 @@ namespace SoulsLike
             return maxHealth;
         }
 
+        public void BreakGuard()
+        {
+            enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
+        }
+
         public override void TakeDamage(int damage, bool playAnimation, string damageAnimation = "Take Damage")
         {
-            playAnimation = false;
-
             if (enemyManager.isPhaseShifting)
             {
                 playAnimation = false;
@@ -56,7 +71,6 @@ namespace SoulsLike
             {
                 enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
             }
-
             if(playAnimation) enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
             if (currentHealth <= 0)

@@ -10,6 +10,11 @@ namespace SoulsLike
         Collider damageCollider;
         public bool enabledDamageColliderOnStartup = false;
 
+        [Header("Poise")]
+        public float poiseBreak;
+        public float offensivePoiseBonus;
+
+        [Header("Damage")]
         public int currentWeaponDamage = 25;
 
         private void Awake()
@@ -60,7 +65,18 @@ namespace SoulsLike
 
                 if(playerStats != null)
                 {
-                    playerStats.TakeDamage(currentWeaponDamage,true);
+                    playerStats.poiseResetTimer = playerStats.totalPoiseResetTime;
+                    playerStats.totalPoiseDefense = playerStats.totalPoiseDefense - poiseBreak;
+                    Debug.Log("Player's Poise is currently " + playerStats.totalPoiseDefense);
+
+                    if (playerStats.totalPoiseDefense > poiseBreak)
+                    {
+                        playerStats.TakeDamage(currentWeaponDamage, false);
+                    }
+                    else
+                    {
+                        playerStats.TakeDamage(currentWeaponDamage, true);
+                    }
                 }
             }
 
@@ -92,7 +108,33 @@ namespace SoulsLike
 
                 if (enemyStats != null)
                 {
-                    enemyStats.TakeDamage(currentWeaponDamage,true);
+                    enemyStats.poiseResetTimer = enemyStats.totalPoiseResetTime;
+                    enemyStats.totalPoiseDefense = enemyStats.totalPoiseDefense - poiseBreak;
+                    Debug.Log("Enemy's Poise is currently " + enemyStats.totalPoiseDefense);
+
+                    if (enemyStats.isBoss)
+                    {
+                        if (enemyStats.totalPoiseDefense > poiseBreak)
+                        {
+                            enemyStats.TakeDamage(currentWeaponDamage, false);
+                        }
+                        else
+                        {
+                            enemyStats.TakeDamage(currentWeaponDamage, false);
+                            enemyStats.BreakGuard();
+                        }
+                    }
+                    else
+                    {
+                        if (enemyStats.totalPoiseDefense > poiseBreak)
+                        {
+                            enemyStats.TakeDamage(currentWeaponDamage, false);
+                        }
+                        else
+                        {
+                            enemyStats.TakeDamage(currentWeaponDamage, true);
+                        }
+                    }
                 }
             }
 

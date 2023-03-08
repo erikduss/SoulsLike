@@ -53,6 +53,10 @@ namespace SoulsLike
                 {
                     animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_02, true);
                 }
+                else if(lastAttack == weapon.th_Heavy_attack_01)
+                {
+                    animatorHandler.PlayTargetAnimation(weapon.th_Heavy_attack_02, true);
+                }
             }
         }
 
@@ -88,7 +92,8 @@ namespace SoulsLike
 
             if (inputHandler.twoHandFlag)
             {
-
+                animatorHandler.PlayTargetAnimation(weapon.th_Heavy_attack_01, true);
+                lastAttack = weapon.th_Heavy_attack_01;
             }
             else
             {

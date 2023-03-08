@@ -22024,6 +22024,14 @@ PrefabInstance:
       propertyPath: currentHelmetEquipment
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3647931939371609494, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
+      propertyPath: weaponsInLeftHandSlots.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 77911fae6b872b945b9b5f444beca696, type: 2}
+    - target: {fileID: 3647931939371609494, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
+      propertyPath: weaponsInRightHandSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 37d0c8dcb1a4b674db9e99a91e7171f7, type: 2}
     - target: {fileID: 3647931939371609500, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -22066,6 +22074,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3647931939371609500, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647931939371609501, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
+      propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3647931939371609503, guid: 7c5d3d8879a2711409db3a4a7ffc310a, type: 3}
@@ -24088,7 +24100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47e31ca8b5a6b54caa6cd3db0cde97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 25
+  healthLevel: 50
   maxHealth: 0
   currentHealth: 0
   staminaLevel: 10
@@ -24098,6 +24110,11 @@ MonoBehaviour:
   maxFocusPoints: 0
   currentFocusPoints: 0
   soulCount: 0
+  totalPoiseDefense: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 75
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0

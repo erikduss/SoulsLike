@@ -20,6 +20,13 @@ namespace SoulsLike
 
         public int soulCount = 0;
 
+        [Header("Poise")]
+        public float totalPoiseDefense; //Total poise after damage calculation
+        public float offensivePoiseBonus; //The poise you gain during an attack with a weapon.
+        public float armorPoiseBonus; //The poise you gain from wearing what ever you have equiped.
+        public float totalPoiseResetTime = 15;
+        public float poiseResetTimer = 0;
+
         [Header("Armor Absorptions")]
         public float physicalDamageAbsorptionHead;
         public float physicalDamageAbsorptionBody;
@@ -27,6 +34,16 @@ namespace SoulsLike
         public float physicalDamageAbsorptionHands;
 
         public bool isDead;
+
+        protected virtual void Update()
+        {
+            HandlePoiseResetTimer();
+        }
+
+        private void Start()
+        {
+            totalPoiseDefense = armorPoiseBonus;
+        }
 
         public virtual void TakeDamage(int phyisicalDamage, bool playAnimation, string damageAnimation = "Take Damage")
         {
@@ -40,19 +57,24 @@ namespace SoulsLike
 
             phyisicalDamage = Mathf.RoundToInt(phyisicalDamage - (phyisicalDamage * totalPhysicalDamageAbsorption));
 
-            Debug.Log("Total Damage Absorption: " + totalPhysicalDamageAbsorption + "%");
+            //Debug.Log("Total Damage Absorption: " + totalPhysicalDamageAbsorption + "%");
 
             float finalDamage = phyisicalDamage; //+Fire damage, etc, etc.
 
             currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 
-            Debug.Log("Total Damage Dealt is: " + finalDamage);
+            //Debug.Log("Total Damage Dealt is: " + finalDamage);
 
             if(currentHealth <= 0)
             {
                 currentHealth = 0;
                 isDead = true;
             }
+        }
+
+        public virtual void HandlePoiseResetTimer()
+        {
+            
         }
     }
 }

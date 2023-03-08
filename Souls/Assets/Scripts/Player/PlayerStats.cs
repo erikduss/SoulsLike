@@ -43,6 +43,18 @@ namespace SoulsLike
             focusPointBar.SetCurrentFocusPoints(currentFocusPoints);
         }
 
+        public override void HandlePoiseResetTimer()
+        {
+            if (poiseResetTimer > 0)
+            {
+                poiseResetTimer = poiseResetTimer - Time.deltaTime;
+            }
+            else if (poiseResetTimer <= 0 && !playerManager.isInteracting)
+            {
+                totalPoiseDefense = armorPoiseBonus;
+            }
+        }
+
         private int SetMaxHealthFromHealthLevel()
         {
             //skill level increase etc things that boost health

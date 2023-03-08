@@ -15,7 +15,20 @@ namespace SoulsLike
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
 
+        EnemyStats enemyStats;
+
         private void Awake()
+        {
+            enemyStats = GetComponentInParent<EnemyStats>();
+            LoadWeaponHolderSlots();
+        }
+
+        private void Start()
+        {
+            LoadWeaponsOnBothHands();
+        }
+
+        private void LoadWeaponHolderSlots()
         {
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -29,11 +42,6 @@ namespace SoulsLike
                     rightHandSlot = weaponSlot;
                 }
             }
-        }
-
-        private void Start()
-        {
-            LoadWeaponsOnBothHands();
         }
 
         public void LoadWeaponOnSlot(WeaponItem weapon, bool isLeft)
@@ -109,5 +117,19 @@ namespace SoulsLike
         {
 
         }
+
+        #region Handle Weapon's Poise Bonus
+
+        public void GrantWeaponAttackingPoiseBonus()
+        {
+            enemyStats.totalPoiseDefense = enemyStats.totalPoiseDefense + enemyStats.offensivePoiseBonus;
+        }
+
+        public void ResetWeaponAttackingPoiseBonus()
+        {
+            enemyStats.totalPoiseDefense = enemyStats.armorPoiseBonus;
+        }
+
+        #endregion
     }
 }
