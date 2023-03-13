@@ -14,6 +14,8 @@ namespace SoulsLike
         PlayerInventoryManager playerInventoryManager;
         InputHandler inputHandler;
         PlayerWeaponSlotManager playerWeaponSlotManager;
+        PlayerEffectsManager playerEffectsManager;
+
         public string lastAttack;
 
         LayerMask backStabLayer = 1 << 14;
@@ -27,6 +29,7 @@ namespace SoulsLike
             playerStatsManager = GetComponent<PlayerStatsManager>();
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
             playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
+            playerEffectsManager = GetComponent<PlayerEffectsManager>();
             inputHandler = GetComponent<InputHandler>();
         }
 
@@ -168,6 +171,8 @@ namespace SoulsLike
                 playerAnimatorManager.anim.SetBool("isUsingRightHand", true);
                 HandleLightAttack(playerInventoryManager.rightWeapon);
             }
+
+            playerEffectsManager.PlayWeaponFX(false);
         }
 
         private void PerformRTMeleeAction()

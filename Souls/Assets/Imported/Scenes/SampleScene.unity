@@ -1670,6 +1670,26 @@ Transform:
   m_Father: {fileID: 914208140}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &378098551 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1631756971264841883, guid: 29e49971b0e0bc3449d782bd083b3a3e, type: 3}
+  m_PrefabInstance: {fileID: 6937835753040247993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &378098562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378098551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a858cdf148e6d43adeb7a8991d3025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodSplatterFX: {fileID: 6533110969264631656, guid: 3ee089ab7decea14187af15c31478646, type: 3}
+  rightWeaponFX: {fileID: 0}
+  leftWeaponFX: {fileID: 0}
 --- !u!1001 &382575141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20304,6 +20324,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 419854, guid: 67f6358a70929f943ae115f8b4bcf075, type: 3}
   m_PrefabInstance: {fileID: 1823085292}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1841728004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2297432890796991006, guid: 59b648d0c5ca4c7418350fe09a7bcc2b, type: 3}
+  m_PrefabInstance: {fileID: 6927489865581905328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1841728014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841728004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a858cdf148e6d43adeb7a8991d3025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodSplatterFX: {fileID: 6533110969264631656, guid: 3ee089ab7decea14187af15c31478646, type: 3}
+  rightWeaponFX: {fileID: 0}
+  leftWeaponFX: {fileID: 0}
 --- !u!1001 &1857212666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21555,6 +21595,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 971617270678743104, guid: cbab3a426868ca649a9ee3daf2fb9adc, type: 3}
+      propertyPath: bloodSplatterFX
+      value: 
+      objectReference: {fileID: 6533110969264631656, guid: 3ee089ab7decea14187af15c31478646, type: 3}
+    - target: {fileID: 971617270678743112, guid: cbab3a426868ca649a9ee3daf2fb9adc, type: 3}
+      propertyPath: weaponsInRightHandSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 77911fae6b872b945b9b5f444beca696, type: 2}
     - target: {fileID: 971617270678743113, guid: cbab3a426868ca649a9ee3daf2fb9adc, type: 3}
       propertyPath: interactableUIGameObject
       value: 

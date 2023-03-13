@@ -7,16 +7,17 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Core
+  m_Name: ParticlesTrail 1
   m_Shader: {fileID: 4800000, guid: 18cc8fe7d50c89741b56c1ae6a5baa66, type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _BLENDMODE_BLEND
   m_InvalidKeywords:
-  - BlendAlpha
+  - BlendAdd
   - Clip_OFF
   - FrameBlend_OFF
   - SoftParticles_OFF
   - VertLight_OFF
-  - _BLENDMODE_ADD
+  - _ALPHABLEND_ON
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -51,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 03628aa00a0025145a8d56db629b8c82, type: 3}
+        m_Texture: {fileID: 2800000, guid: 44f47db5199ce90438b38b64a3bcdce3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -72,9 +73,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - DstMode: 10
+    - DstMode: 1
     - SrcMode: 5
-    - _BlendMode: 0
+    - _BlendMode: 1
     - _BumpScale: 1
     - _CullMode: 0
     - _Cutoff: 0.5
@@ -82,7 +83,8 @@ Material:
     - _CutoutThreshold: 0.015
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _DstMode: 1
+    - _DstMode: 10
+    - _FogColorMultiplier: 0
     - _FresnelFadeFactor: 3
     - _FresnelPow: 5
     - _FresnelR0: 0.04
@@ -117,5 +119,5 @@ Material:
     - _FogColorMultiplier: {r: 0, g: 0, b: 0, a: 0}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _Tiling: {r: 800, g: 800, b: 8, a: 8}
-    - _TintColor: {r: 3.617311, g: 7.7368083, b: 3.4701862, a: 0.737}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 0.79}
   m_BuildTextureStacks: []

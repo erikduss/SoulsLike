@@ -13,6 +13,7 @@ namespace SoulsLike
         QuickSlotsUI quickSlotsUI;
         PlayerStatsManager playerStatsManager;
         InputHandler inputHandler;
+        PlayerEffectsManager playerEffectsManager;
 
         [Header("Attacking Weapon")]
         public WeaponItem attackingWeapon;
@@ -25,6 +26,7 @@ namespace SoulsLike
             quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
             playerStatsManager = GetComponent<PlayerStatsManager>();
             inputHandler = GetComponent<InputHandler>();
+            playerEffectsManager = GetComponent<PlayerEffectsManager>();
 
             LoadWeaponHolderSlots();
         }
@@ -119,6 +121,7 @@ namespace SoulsLike
             leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             leftHandDamageCollider.currentWeaponDamage = playerInventoryManager.leftWeapon.baseDamage;
             leftHandDamageCollider.poiseBreak = playerInventoryManager.leftWeapon.poiseBreak;
+            playerEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
 
         private void LoadRightWeaponDamageCollider()
@@ -126,6 +129,7 @@ namespace SoulsLike
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
             rightHandDamageCollider.currentWeaponDamage = playerInventoryManager.rightWeapon.baseDamage;
             rightHandDamageCollider.poiseBreak = playerInventoryManager.rightWeapon.poiseBreak;
+            playerEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
         }
 
         public void OpenDamageCollider()

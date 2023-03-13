@@ -8,12 +8,14 @@ namespace SoulsLike
     {
         EnemyManager enemyManager;
         EnemyBossManager enemyBossManager;
+        EnemyEffectsManager enemyEffectsManager;
 
         protected override void Awake()
         {
             base.Awake();
             anim = GetComponent<Animator>();
             enemyManager = GetComponent<EnemyManager>();
+            enemyEffectsManager = GetComponent<EnemyEffectsManager>();
             enemyBossManager = GetComponent<EnemyBossManager>();
         }
 
@@ -39,6 +41,11 @@ namespace SoulsLike
             BossFxTransform bossFxTransform = GetComponentInChildren<BossFxTransform>();
 
             GameObject phaseFX = Instantiate(enemyBossManager.particleFX, bossFxTransform.transform);
+        }
+
+        public void PlayWeaponTrailFX()
+        {
+            enemyEffectsManager.PlayWeaponFX(false);
         }
 
         private void OnAnimatorMove()
